@@ -1,19 +1,28 @@
-import React ,{useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Logo from '../assets/svgs/logo.svg';
+import CreatePassword from './CreatePassword';
 
 const OTP = ({ setEnterOtp }) => {
+    const [createPassword, setCreatePassword] = useState(false)
   const handleOtpSubmit = (e) => {
     e.preventDefault();
+    setCreatePassword(true);
     // Add OTP verification logic here
     console.log('OTP submitted');
   };
+const handleEnterOtp = () => {
+  setCreatePassword(false);
+};
+  const handleResendOtp = () => {
+    // Add resend OTP logic here
+    console.log('Resend OTP');
+  };
+
   const inputs = useRef([]);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
     if (value.length > 1) return;
-
-    // Move to next input
     if (value && index < 3) {
       inputs.current[index + 1]?.focus();
     }
@@ -27,26 +36,40 @@ const OTP = ({ setEnterOtp }) => {
 
   return (
     <>
-      <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block" />
-      <h1 className="text-2xl font-semibold leading-4 mt-6 mb-10">Welcome to Coin P2P Trader</h1>
+    {createPassword ? (
+        <CreatePassword setCreatePassword={setCreatePassword}   />
+    ) : (
+        <>
+        <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block" />
+      <h1 className="text-2xl font-semibold leading-4 mt-6 mb-10">Enter OTP</h1>
+      <p className="text-lg font-normal text-black leading-6">
+        OTP sent to your registered Email Address
+      </p>
+      <p className="text-lg font-normal text-black leading-6 mb-6">
+        Please enter the OTP and click on Continue
+      </p>
+
       <form className="w-full space-y-4" onSubmit={handleOtpSubmit}>
-      <label className="text-[15px] leading-4 text-black text-left font-medium mb-3 block w-full">
-              OTP
-            </label>
+        <label className="text-[15px] leading-4 text-black text-left font-medium mb-3 block w-full">
+          OTP
+        </label>
+
         <div className="flex items-center justify-start space-x-4">
-      {Array(4).fill().map((_, i) => (
-        <input
-          key={i}
-          type="text"
-          maxLength={1}
-          ref={el => inputs.current[i] = el}
-          onChange={e => handleChange(e, i)}
-          onKeyDown={e => handleKeyDown(e, i)}
-          className="w-12 h-12 text-center border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      ))}
-    </div>
-        
+          {Array(4)
+            .fill()
+            .map((_, i) => (
+              <input
+                key={i}
+                type="text"
+                maxLength={1}
+                ref={(el) => (inputs.current[i] = el)}
+                onChange={(e) => handleChange(e, i)}
+                onKeyDown={(e) => handleKeyDown(e, i)}
+                className="w-14 h-12 text-center border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            ))}
+        </div>
+
         <button
           type="submit"
           className="w-full rounded-xl py-3 px-4 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
@@ -54,15 +77,19 @@ const OTP = ({ setEnterOtp }) => {
           Continue
         </button>
 
-        {/* Optional: Back button */}
+        {/* Resend OTP button */}
         <button
           type="button"
-          onClick={() => setEnterOtp(false)}
-          className="mt-2 text-sm text-gray-600 underline"
+          onClick={handleResendOtp}
+          className="mt-4 text-base leading-5 text-black font-normal cursor-pointer"
         >
-          Back
+         Resend OTP
         </button>
       </form>
+        </>
+    )
+    }
+      
     </>
   );
 };
