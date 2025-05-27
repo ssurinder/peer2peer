@@ -1,0 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap');
+@import "tailwindcss";
+:root {
+    --gradient-1: #FDFDFD;
+    --gradient-2: #C1D0FF;
+    --button-gradient-1: #4672FF;
+    --button-gradient-2: #59FFDE;
+    --border-color: #6E6A6A;
+  }
+/*   
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --gradient-1: red;
+      --gradient-2: yellow;
+    }
+  } */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Afacad", sans-serif;
+}
