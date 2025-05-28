@@ -27,11 +27,12 @@ const CreatePassword = ({ setCreatePassword }) => {
   };
 
   return (
-    <>
-      <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block" />
-      <h1 className="text-2xl font-semibold leading-4 mt-6 mb-10">
+    <div className='flex flex-col justify-center w-full'>
+      <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block mx-auto" />
+      <h1 className="text-2xl font-semibold leading-4 mt-6 mb-10 text-center">
       Create Password
       </h1>
+      
       <form onSubmit={handleEnterOtp} className="w-full space-y-4">
         
         <div className="w-full mb-4 ">
@@ -65,7 +66,7 @@ const CreatePassword = ({ setCreatePassword }) => {
           Confirm
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
