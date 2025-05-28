@@ -9,9 +9,9 @@ if (rootEl) {
   ReactDOM.createRoot(rootEl).render(
     <React.StrictMode>
       <BrowserRouter>
-        <div className='max-w-[600px] mx-auto'>
+        
           <App />
-        </div>
+        
       </BrowserRouter>
     </React.StrictMode>
   );

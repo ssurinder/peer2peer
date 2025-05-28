@@ -15,6 +15,7 @@ const Login = () => {
   
 
   return (
+    <div className='max-w-[600px] mx-auto'>
     <div className="min-h-screen px-6 py-4 flex flex-col items-center justify-between bg-white text-black font-sans">
     {password ? (
       <Password setPassword={setPassword} />
@@ -70,6 +71,7 @@ const Login = () => {
         <img src={VarifyIcon} alt='' className='w-4 h-4' />
         A secure P2P service provider
       </div>
+    </div>
     </div>
   );
 };
