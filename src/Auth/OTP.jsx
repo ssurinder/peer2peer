@@ -42,10 +42,10 @@ const handleEnterOtp = () => {
         <div className='w-full flex flex-col justify-center'>
         <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block mx-auto" />
       <h1 className="text-2xl font-semibold text-center  leading-4 mt-6 mb-10">Enter OTP</h1>
-      <p className="text-base font-normal text-black leading-6">
+      <p className="text-base font-normal text-black leading-6 text-center">
         OTP sent to your registered Email Address
       </p>
-      <p className="text-base font-normal text-black leading-6 mb-6">
+      <p className="text-base font-normal text-black leading-6 mb-6 text-center">
         Please enter the OTP and click on Continue
       </p>
 
