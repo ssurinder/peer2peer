@@ -3,6 +3,8 @@ import { useAuth } from "../context/AuthContext";
 
 const AuthGuard = () => {
   const { isAuthenticated } = useAuth();
+
+  console.log('we are inside authguard' , isAuthenticated)
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 

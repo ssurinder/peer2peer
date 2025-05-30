@@ -7,6 +7,8 @@ import Home from './Home';
 import Dashboard from "./pages/Dashboard";
 import AuthGuard from "./components/AuthGuard"; 
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   return (
     <Routes>

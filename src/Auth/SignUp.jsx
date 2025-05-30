@@ -9,6 +9,7 @@ import { registerUser } from "../api/api";
 const Signup = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  
   const handleSubmit = async () => {
     try {
       await registerUser(form);
