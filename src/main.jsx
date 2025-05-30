@@ -2,17 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { AuthProvider } from "./context/AuthContext";
 import './index.css'
 
 const rootEl = document.getElementById('root');
 if (rootEl) {
   ReactDOM.createRoot(rootEl).render(
     <React.StrictMode>
-      <BrowserRouter>
-        <div className='max-w-[600px] mx-auto'>
-          <App />
-        </div>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className='max-w-[600px] mx-auto'>
+            <App />
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
     </React.StrictMode>
   );
 } else {
