@@ -1,7 +1,9 @@
 const BASE_URL = "https://api.coinp2ptrader.com/api/";
+// const BASE_URL = "http://192.168.1.3:8800/api/";
 
 export async function registerUser (data ){
-    const res = await fetch(`${BASE_URL}/register`, {
+    console.log(' data is '  , data)
+    const res = await fetch(`${BASE_URL}user/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -18,12 +20,14 @@ export async function loginUser (data){
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    console.log('now we inside login ' ,res)
-    return res.json();
-    // if (!res.ok) {
-    //   const error = await res.json();
-    //   throw new Error(error.message || "Login failed");
-    // }
-  
-    // return res.json(); // should return token
+    // console.log('now we inside login ' ,res)
+    return res.json(); 
 } 
+
+export async function validateSponser (sponserId){
+    const res = await fetch(`${BASE_URL}user/getUser?userId=`+sponserId,{
+        method:"GET",
+        headers:{ "Content-Type": "application/json" },
+    })
+    return res.json()
+}
