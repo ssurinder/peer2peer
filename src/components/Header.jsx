@@ -1,40 +1,55 @@
-import React from 'react'
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import Logo from '../assets/svgs/logo.svg'
+import React from 'react';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Logo from '../assets/svgs/logo.svg';
+import LogoWhite from '../assets/svgs/logo_white.svg'
 import { Link } from 'react-router-dom';
-import Splash from '../Splash';
+import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
-    const navigation = [
-        { name: 'Home', href: '/', current: true },
-        { name: 'About', href: '#', current: false },
-        { name: 'Products', href: '#', current: false },
-        { name: 'Contact', href: '#', current: false },
-      ]
-      function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-      }
+  const { isAuthenticated } = useAuth();
+
+  const navigation = [
+    { name: 'Home', href: '/', current: true },
+    { name: 'About', href: '#', current: false },
+    { name: 'Products', href: '#', current: false },
+    { name: 'Contact', href: '#', current: false },
+  ];
+
+  const classNames = (...classes) =>
+  classes.filter(Boolean).join(' ');
+
+  if (isAuthenticated) {
+    // 🔒 Logged-in header
+    return (
+      <div className="bg-blue-600 text-white pt-10 pb-6 px-4 flex items-center justify-between w-full relative z-0 after:absolute after:-bottom-5 after:left-0 after:w-full after:h-6 after:bg-blue-600 after:-z[1]">
+        <img src={LogoWhite} alt="Logo" className="h-8" />
+        <div className="text-sm border rounded px-2 py-1 bg-white text-black">
+          🇺🇸 Country
+        </div>
+      </div>
+    );
+  }
+
+  // 🔓 Public header
   return (
     <Disclosure as="nav" className="bg-white shadow-2xl relative z-[1]">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
-              <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              <Bars3Icon className="block h-6 w-6 group-data-open:hidden" />
+              <XMarkIcon className="hidden h-6 w-6 group-data-open:block" />
             </DisclosureButton>
           </div>
+
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
             <div className="flex shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src={Logo}
-                className="h-8 w-auto"
-              />
+              <img src={Logo} alt="Logo" className="h-8 w-auto" />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
@@ -44,20 +59,24 @@ const Header = () => {
                     href={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
-                      item.current ? 'text-[var(--link-color)] focus-within:outline-0 focus:outline-0' : 'text-gray-500 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-base font-medium',
+                      item.current
+                        ? 'text-[var(--link-color)]'
+                        : 'text-gray-500 hover:bg-gray-700 hover:text-white',
+                      'rounded-md px-3 py-2 text-base font-medium'
                     )}
                   >
                     {item.name}
                   </a>
                 ))}
-                <Link to="/splash" className="rounded-xl py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]">
-  Login/Register
-</Link>
+                <Link
+                  to="/splash"
+                  className="rounded-xl py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
+                >
+                  Login/Register
+                </Link>
               </div>
             </div>
           </div>
-          
         </div>
       </div>
 
@@ -70,8 +89,10 @@ const Header = () => {
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
+                item.current
+                  ? 'bg-gray-900 text-white'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                'block rounded-md px-3 py-2 text-base font-medium'
               )}
             >
               {item.name}
@@ -80,7 +101,7 @@ const Header = () => {
         </div>
       </DisclosurePanel>
     </Disclosure>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
