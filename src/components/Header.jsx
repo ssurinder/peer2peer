@@ -29,7 +29,7 @@ const Header = () => {
       <div className="bg-blue-600 text-white pt-10 pb-6 px-4 flex items-center justify-between w-full relative z-0 after:absolute after:-bottom-5 after:left-0 after:w-full after:h-6 after:bg-blue-600 after:-z[1]">
         <img src={LogoWhite} alt="Logo" className="h-8" />
         <div className="text-sm border rounded px-2 py-1 bg-white text-black">
-          🇺🇸 Country
+          Our Country
         </div>
       </div>
     );
@@ -98,6 +98,12 @@ const Header = () => {
               {item.name}
             </DisclosureButton>
           ))}
+          <Link
+                  to="/splash"
+                  className="rounded-xl block py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
+                >
+                  Login/Register
+                </Link>
         </div>
       </DisclosurePanel>
     </Disclosure>

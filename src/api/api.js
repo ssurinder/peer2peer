@@ -1,4 +1,4 @@
-// const BASE_URL = "https://api.coinp2ptrader.com/api/";
+//const BASE_URL = "https://api.coinp2ptrader.com/api/";
 const BASE_URL = "http://192.168.1.3:8800/api/";
 
 export async function registerUser (data ){

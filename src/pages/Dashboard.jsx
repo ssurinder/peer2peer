@@ -1,11 +1,4 @@
-
-
-
-
 import { useState, Fragment } from 'react';
-import { ToastContainer } from 'react-toastify';
-// import { toast } from 'react-toastify';
-// import { useNavigate } from "react-router-dom";
 import BellIcon from '../assets/svgs/notify_icon.svg'
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
@@ -31,28 +24,16 @@ const cryptos = [
 ];
 
 const Dashboard = () => {  
-  // const navigate = useNavigate();  
-  // const handleLogout = async () => {
-  //   console.log('clicked')
-
-  //   localStorage.removeItem('auth_token'); 
-  //   localStorage.removeItem('isAuthenticated'); 
-  //   toast.success('Logged out successfully!');
-  //   setTimeout(() => {
-  //     navigate("/login");
-  //   }, 2000);
-    
-  // } 
+  
   const [activeTab, setActiveTab] = useState("accept");
   const [selected, setSelected] = useState(cryptos[0]);
-  return (<div>
-    <ToastContainer position="top-right" autoClose={3000} />
-              {/* <button onClick={handleLogout} type="button">LOGOUT</button>
-              <h2>Protected Dashboard Page</h2> */}
-               <div className='max-w-[600px] mx-auto'>
-      <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans bg-[var(--primary)]">  
+  return (    
+               <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
+    <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
+      <div className='h-[calc(100vh_-_60px)] overflow-auto w-full bg-[var(--primary)] '> 
       <Header />
-      <div className='w-full px-4 bg-[var(--primary)] rounded-t-xl relative z-[1] pt-3'>
+      <div className='w-full bg-[var(--primary)] rounded-t-xl relative z-[1] overflow-auto'>
+        <div className='w-full px-4 pt-3'>
         {/* Tabs */}
       <div className="flex items-center justify-around text-sm">
         <div className='flex-1 flex items-center gap-2'>
@@ -148,12 +129,13 @@ const Dashboard = () => {
         </div>
       </div>
       </div>
-
+      </div>
+      </div>
       {/* Bottom Navigation */}
       <Footer />
     </div>
     </div>
-          </div>);
+          );
 }
   
 

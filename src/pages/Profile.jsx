@@ -10,10 +10,11 @@ const Profile = () => {
   date: '25-05-2025',
 });
   return (
+    <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
-     
+      <div className='h-[calc(100vh_-_60px)] overflow-auto w-full bg-[var(--primary)] '>
         <Header />
-      <div className='w-full bg-[var(--primary)] rounded-t-xl relative z-[1] pt-3'>
+      <div className=' w-full bg-[var(--primary)] rounded-t-xl relative z-[1] pt-3'>
         <div className="flex items-center justify-between">
           <div className="flex items-center flex-col  w-full">
             <div className='flex w-full items-center justify-between  px-4'>
@@ -101,9 +102,9 @@ const Profile = () => {
         </div>
 
       </div>
- 
+ </div>
       <Footer />
-    </div>
+    </div></div>
   )
 }
 
