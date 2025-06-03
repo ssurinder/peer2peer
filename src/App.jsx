@@ -6,6 +6,7 @@ import SignUp from './Auth/SignUp';
 import Home from './Home'; 
 import Dashboard from "./pages/Dashboard";
 import AuthGuard from "./components/AuthGuard"; 
+import VerifySignup from "./Auth/VerifySignUp"
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/splash" element={<Splash />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/veify_signup" element={<VerifySignup />} />
       <Route path="/signup" element={<SignUp />} />
       <Route element={<AuthGuard />}>
         <Route path="/dashboard" element={<Dashboard />} />

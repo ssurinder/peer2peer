@@ -12,10 +12,11 @@ import { countries } from './../components/coutries';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 const Signup = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [sponserId, setSponserId] = useState('');
+
+  const navigate = useNavigate();
+  const [sponsorId, setSponserId] = useState('');
   const [sponserName, setSponserName] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,11 +35,12 @@ const Signup = () => {
         countryCode : selectedCountry.value,
         phoneNumber  : phoneNumber,
         country : selectedCountry.label,
-        sponserId : sponserId,
+        sponsorId : sponsorId,
       }
-      let resp = await registerUser(formData);
-      console.log('resp is ' . resp)
+      let response = await registerUser(formData);
+      console.log(formData ,'resp is ' . resp)
       toast.success(response.message); 
+      navigate("/veify_signup", { state: {email: formData.email} });
       // navigate("/login");
     } catch (err) {
       setError(err.message);
@@ -51,7 +53,7 @@ const Signup = () => {
 
   const validateSponserId = async () => { 
     // console.log(' now we are validating for sponser' , sponserId)
-    let response = await validateSponser(sponserId)
+    let response = await validateSponser(sponsorId)
      if (response.success == false) {
       toast.error(response.message);
       setSponserName('')
@@ -83,7 +85,7 @@ const Signup = () => {
                   />
                   <div className="flex gap-3">
                   <input type="text" placeholder="Country code" value={selectedCountry.value} className="w-1/3 px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" />
-                  <input type="text" placeholder="Enter Phone Number"  onChange={(e) => setPhone(e.target.value)} className="w-2/3 px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" />
+                  <input type="text" placeholder="Enter Phone Number"  onChange={(e) => setPhoneNumber(e.target.value)} className="w-2/3 px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" />
                   </div>
 
                   <button className="w-full rounded-xl py-3 px-4 text-base leading-5  text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]">Sign up</button>

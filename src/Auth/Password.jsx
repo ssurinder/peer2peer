@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../assets/svgs/logo.svg';
-import OTP from './OTP';
+import OTP from './VerifySignUp';
 
 const Password = () => {
   const [forgotPassword, setForgotPassword] = useState(false);

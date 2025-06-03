@@ -1,5 +1,5 @@
-const BASE_URL = "https://api.coinp2ptrader.com/api/";
-// const BASE_URL = "http://192.168.1.3:8800/api/";
+// const BASE_URL = "https://api.coinp2ptrader.com/api/";
+const BASE_URL = "http://192.168.1.3:8800/api/";
 
 export async function registerUser (data ){
     console.log(' data is '  , data)
@@ -8,10 +8,7 @@ export async function registerUser (data ){
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || "Registration failed");
-    }
+    return res.json(); 
 }
 
 export async function loginUser (data){ 
@@ -23,6 +20,31 @@ export async function loginUser (data){
     // console.log('now we inside login ' ,res)
     return res.json(); 
 } 
+
+
+
+export async function verifySignup (data){ 
+    const res = await fetch(`${BASE_URL}user/verifySignup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    // console.log('now we inside login ' ,res)
+    return res.json(); 
+} 
+
+
+
+export async function resendVierifyOtpMail (data){ 
+    const res = await fetch(`${BASE_URL}user/resendOtp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    // console.log('now we inside login ' ,res)
+    return res.json(); 
+} 
+
 
 export async function validateSponser (sponserId){
     const res = await fetch(`${BASE_URL}user/getUser?userId=`+sponserId,{
