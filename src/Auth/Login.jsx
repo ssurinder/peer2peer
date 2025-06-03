@@ -53,7 +53,7 @@ const Login = () => {
   return (
     <div className='max-w-[600px] mx-auto'>
       <ToastContainer position="top-right" autoClose={3000} />
-      <div className="min-h-screen px-6 py-4 flex flex-col items-center justify-between bg-white text-black font-sans">
+      <div className="min-h-screen py-4 flex flex-col items-center justify-between bg-white text-black font-sans">
        
             <>
             <div className='w-full text-center'>

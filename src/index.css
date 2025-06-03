@@ -8,6 +8,8 @@
     --button-gradient-2: #59FFDE;
     --border-color: #6E6A6A;
     --link-color: #014cec;
+    --text-color: #575757;
+    --primary: #F8F8F8
   }
 /*   
   @media (prefers-color-scheme: dark) {

@@ -5,6 +5,8 @@ import Login from './Auth/Login';
 import SignUp from './Auth/SignUp'; 
 import Home from './Home'; 
 import Dashboard from "./pages/Dashboard";
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 import AuthGuard from "./components/AuthGuard"; 
 import VerifySignup from "./Auth/VerifySignUp"
 
@@ -20,6 +22,8 @@ const App = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route element={<AuthGuard />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
     </Routes>
   );
