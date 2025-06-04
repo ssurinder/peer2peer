@@ -4,6 +4,7 @@ import { FiList, FiSpeaker, FiUser } from "react-icons/fi";
 import { useLocation, NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+import { t, setLang } from '../components/i18n';
 const Footer = () => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
@@ -15,6 +16,58 @@ const Footer = () => {
     return (
       <div className="bg-[var(--primary)] text-center py-4 text-white">
         Public Footer
+      </div>
+    );
+  }else{
+    return (
+      <div className="sticky w-full bottom-0 left-0 right-0 bg-white border-t flex justify-around py-2 text-sm z-10">
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex flex-col items-center text-blue-600'
+              : 'flex flex-col items-center text-gray-500'
+          }
+        >
+          <FaUserFriends size={20} />
+          <span>P2P</span>
+        </NavLink>
+
+        <NavLink
+          to="/orders"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex flex-col items-center text-blue-600'
+              : 'flex flex-col items-center text-gray-500'
+          }
+        >
+          <FiList size={20} />
+          <span>Orders</span>
+        </NavLink>
+
+        <NavLink
+          to="/ad"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex flex-col items-center text-blue-600'
+              : 'flex flex-col items-center text-gray-500'
+          }
+        >
+          <FiSpeaker size={20} />
+          <span>Ad</span>
+        </NavLink>
+
+        <NavLink
+          to="/profile"
+          className={({ isActive }) =>
+            isActive
+              ? 'flex flex-col items-center text-blue-600'
+              : 'flex flex-col items-center text-gray-500'
+          }
+        >
+          <FiUser size={20} />
+          <span>{t('profile')}</span>
+        </NavLink>
       </div>
     );
   }
@@ -68,7 +121,7 @@ const Footer = () => {
           }
         >
           <FiUser size={20} />
-          <span>Profile</span>
+          <span>{t('profile')}</span>
         </NavLink>
       </div>
     );

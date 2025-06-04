@@ -1,20 +1,13 @@
 import React from 'react'
 import Header from '../components/Header'
-import {
-  FaUser,
-  FaBell,
-  FaWallet,
-  FaPlusSquare,
-  FaGlobe,
-  FaQuestionCircle,
-  FaInfoCircle,
-  FaSignOutAlt,
-} from 'react-icons/fa';
+
+import Footer from '../components/Footer';
+import { FaUser, FaBell, FaWallet, FaPlusSquare, FaGlobe, FaQuestionCircle, FaInfoCircle, FaSignOutAlt, } from 'react-icons/fa';
 import { HiArrowLeft } from 'react-icons/hi';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-
+import { t, setLang } from '../components/i18n';
 const settingsItems = [
   { icon: <FaUser />, label: 'Account' },
   { icon: <FaBell />, label: 'Notifications' },
@@ -26,6 +19,7 @@ const settingsItems = [
 ];
 const Settings = () => {
     const navigate = useNavigate();  
+    let currentLang = localStorage.getItem("current_lang");
       const handleLogout = async () => {
         console.log('clicked')
     
@@ -37,6 +31,10 @@ const Settings = () => {
         }, 2000);
         
       } 
+
+       const changeLanguage = (e) => {
+        setLang(e.target.value);
+      };
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
@@ -58,15 +56,23 @@ const Settings = () => {
             <span>{item.label}</span>
           </div>
         ))}
-
+        <div key="0" className="flex items-center space-x-4 px-4 py-3 text-sm border-b border-[#EEEEEE]"  >
+          {/* <div className="text-base text-black">Language</div> */}
+          {/* <span>Lang</span> */}
+           <select onChange={changeLanguage} value={currentLang} className="mb-4 p-2 border">
+              <option value="en" >English</option>
+              <option value="hi">Hindi</option>
+              <option value="fr">French</option>
+            </select>
+        </div> 
         {/* Logout */}
         <button onClick={handleLogout} type='button' className="flex items-center space-x-4 px-4 py-3 text-sm text-red-600">
           <FaSignOutAlt />
           <span>Log out</span>
         </button>
       </div>
-
-      {/* Footer */}
+ 
+      
       <div className="mt-auto py-4 text-center text-xs text-gray-500">
         <div className="flex justify-center items-center gap-1">
           <svg
@@ -85,9 +91,11 @@ const Settings = () => {
           <span>A secure P2P service provider</span>
         </div>
       </div>
+      
       </div>
     </div>
     </div>
+     <Footer />
     </div></div>
   )
 }

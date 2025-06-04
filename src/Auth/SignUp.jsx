@@ -9,6 +9,7 @@ import { registerUser , validateSponser } from "../api/api";
 import Select from 'react-select';
 import { countries } from './../components/coutries'; 
 
+import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 const Signup = () => {
@@ -22,6 +23,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
 
 
   const handleSubmit = async (e) => {
@@ -36,11 +38,16 @@ const Signup = () => {
         phoneNumber  : phoneNumber,
         country : selectedCountry.label,
         sponsorId : sponsorId,
+        password:password
       }
       let response = await registerUser(formData);
       console.log(formData ,'resp is ' . resp)
-      toast.success(response.message); 
-      navigate("/veify_signup", { state: {email: formData.email} });
+      if(response.success == true){
+          toast.success(response.message); 
+          navigate("/veify_signup", { state: {email: formData.email ,password : password} });
+      }else{
+        toast.error(response.message);
+      }
       // navigate("/login");
     } catch (err) {
       setError(err.message);
@@ -76,6 +83,7 @@ const Signup = () => {
                   <input type="text" placeholder="Sponser Name" value={sponserName} className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" readOnly/>
                   <input type="text" placeholder="Enter your Name"  onChange={(e) => setName(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" />
                   <input type="email" placeholder="Enter Email"  onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" />
+                  <input type="password" placeholder="Enter Password"  onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" />
                   {/* <input type="text" placeholder="Choose country" className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none" /> */}
                   <Select
                     options={countries}
@@ -89,7 +97,7 @@ const Signup = () => {
                   </div>
 
                   <button className="w-full rounded-xl py-3 px-4 text-base leading-5  text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]">Sign up</button>
-
+                  <p>Already have an account. <Link to="/login">Login?</Link></p>
                   <div className="space-y-3">
                   <button className="w-full flex items-center justify-center gap-2 py-3 px-4 text-base leading-5 bg-white text-black font-normal cursor-pointer rounded-xl border border-neutral-300 hover:bg-gray-100">
                       <img src={GoogleIcon} className="w-5 h-5" alt="Google" />

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Password from "../Auth/Password"
 import { loginUser } from "../api/api";
 
+import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 
@@ -35,7 +36,8 @@ const Login = () => {
           toast.error(response.message);
         }else{
           toast.success(response.message); 
-          localStorage.setItem('auth_token', response.data);
+          login(response.data)
+          // localStorage.setItem('auth_token', response.data);
           setTimeout(() => {
             navigate("/dashboard");
           }, 2000);
@@ -82,11 +84,12 @@ const Login = () => {
                     placeholder="Enter Password"
                     className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none"
                   />
+                  <Link to="/forgot_password" className="text-right">Forgot Password</Link>
                   <button type="submit" className=" mt-4 w-full rounded-xl py-3 px-4 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]">
                     {loading ? 'Signing in...' : 'Sign in'}
                   </button>
                 </div>
-                
+                <p>Don’t have an account? <Link to="/signup">Register Now</Link></p>
                 <div className='w-full flex items-center relative bg-transparent after:absolute after:top-1/2 after:left-0 after:w-full after:h-[1px] after:border-t-1 after:border-dashed border-neutral-100/10 justify-center z-1 after:-z[1]'>
                       <span className='bg-white py-1 px-4 relative z-[1]'>Or</span>
                 </div>

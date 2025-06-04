@@ -15,7 +15,7 @@ const VerifySignUp = () => {
   const navigate = useNavigate();
   // const [createPassword, setCreatePassword] = useState(false)
   const location = useLocation();
-  const { email } = location.state || {};
+  const { email ,password} = location.state || {};
 
   const handleOtpSubmit =async (e) => {
     e.preventDefault(); 
@@ -24,15 +24,16 @@ const VerifySignUp = () => {
     setLoading(true);
     setError('');
     try {
-      let formData = {email : email,otp : parseInt(otp),}
+      let formData = {email : email,otp : parseInt(otp),password:password}
       let response = await verifySignup(formData);
       console.log(formData ,'resp is ' . resp)
      
       if(response.success == true){
         toast.success(response.message); 
-        localStorage.setItem('auth_token', response.data);
+        // localStorage.setItem('auth_token', response.data);
+        // let successMessage = 'Dear '+response.data.details.name + ' Your Acount Created Successfully <br>UserId : '+response.data.details.userId + '<br>Password : '+response.data.details.password
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/register-success",{ state: {data: response.data.details} });
         }, 2000);
          // navigate("/veify_signup", { state: {email: formData.email} });//redirect to create password page
       }else{

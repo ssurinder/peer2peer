@@ -10,7 +10,7 @@ import LogoWhite from '../assets/svgs/logo_white.svg'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Header = () => {
+const Header = ({data}) => {
   const { isAuthenticated } = useAuth();
 
   const navigation = [
@@ -28,9 +28,7 @@ const Header = () => {
     return (
       <div className="bg-blue-600 text-white pt-10 pb-6 px-4 flex items-center justify-between w-full relative z-0 after:absolute after:-bottom-5 after:left-0 after:w-full after:h-6 after:bg-blue-600 after:-z[1]">
         <img src={LogoWhite} alt="Logo" className="h-8" />
-        <div className="text-sm border rounded px-2 py-1 bg-white text-black">
-          Our Country
-        </div>
+        {data?.data.country}
       </div>
     );
   }
