@@ -1,14 +1,21 @@
-import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import React, { useState, useEffect } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { t, setLang } from '../components/i18n';
 import { FaThumbsUp, FaCrown, FaShareAlt, FaCog } from 'react-icons/fa';
-
+import {getData, postData } from '../api/protectedApi'
 const Profile = () => {
     const reviews = new Array(7).fill({
   id: 'P2P-9sff6wo',
   date: '25-05-2025',
 });
+const [data, setData] = useState(null);
+useEffect(() => {
+    getData('/user/userProfile',{})
+    .then((res) => {setData(res.data.data),console.log('data ' , res.data.data)})
+    .catch((err) => console.error(err));
+}, []);
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
@@ -25,7 +32,7 @@ const Profile = () => {
             />
             <div className="flex space-x-4 text-gray-500 text-lg">
             <FaShareAlt className='text-black' />
-            <Link to="/settings">
+            <Link to="/Settings">
                  <FaCog className='text-black' />
             </Link>
            
@@ -33,7 +40,7 @@ const Profile = () => {
           </div>
             <div className='w-full mt-3  px-4'>
               <h2 className="font-semibold text-lg flex items-center gap-1">
-                Stas Neprokin
+              {t('hello')} {data?.data.name}
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png"
                   alt="verified"

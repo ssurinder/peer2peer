@@ -97,7 +97,7 @@ const Signup = () => {
                   </div>
 
                   <button className="w-full rounded-xl py-3 px-4 text-base leading-5  text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]">Sign up</button>
-                  <p>Already have an account. <Link to="/login">Login?</Link></p>
+                  <p>Already have an account ? <Link className='font-semibold text-[var(--link-color)]' to="/login">Login</Link></p>
                   <div className="space-y-3">
                   <button className="w-full flex items-center justify-center gap-2 py-3 px-4 text-base leading-5 bg-white text-black font-normal cursor-pointer rounded-xl border border-neutral-300 hover:bg-gray-100">
                       <img src={GoogleIcon} className="w-5 h-5" alt="Google" />

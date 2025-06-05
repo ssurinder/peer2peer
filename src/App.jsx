@@ -6,11 +6,15 @@ import SignUp from './Auth/SignUp';
 import Home from './Home'; 
 import Dashboard from "./pages/Dashboard";
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
+import Settings from './pages/Profile/Settings';
 import AuthGuard from "./components/AuthGuard"; 
 import VerifySignup from "./Auth/VerifySignUp";
 import ForgotPassword from "./Auth/ForgotPassword"
 import RegisterSuccess from "./Auth/RegisterSuccess"
+import PaymentMethod from './pages/Profile/PaymentMethod';
+import AddBank from './pages/Profile/PaymentMothod/AddBank';
+import AddUpi from './pages/Profile/PaymentMothod/AddUpi';
+import CreateAds from './pages/CreateAds';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,7 +32,11 @@ const App = () => {
       <Route element={<AuthGuard />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path='/createads' element={<CreateAds />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/paymentmethod" element={<PaymentMethod />} />
+        <Route path='/addbank' element={<AddBank />} />
+        <Route path='/addupi' element={<AddUpi />} />
       </Route>
     </Routes>
   );

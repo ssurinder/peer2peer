@@ -5,11 +5,14 @@
     --gradient-1: #FDFDFD;
     --gradient-2: #C1D0FF;
     --button-gradient-1: #4672FF;
+    --bg-color: #1560ff;
     --button-gradient-2: #59FFDE;
     --border-color: #6E6A6A;
     --link-color: #014cec;
     --text-color: #575757;
-    --primary: #F8F8F8
+    --primary: #F8F8F8;
+    --logout: #A80606;
+    --delete: #FFD5D5;
   }
 /*   
   @media (prefers-color-scheme: dark) {
@@ -21,5 +24,13 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Afacad", sans-serif;
+    font-family: "Afacad", sans-serif !important;
 }
+.css-13cymwt-control, .css-t3ipsp-control, .css-t3ipsp-control:hover {
+  padding: .325rem 1rem;
+  border-radius: 12px !important;
+  border: 1px solid oklch(87% 0 0)!important
+}
+.css-hlgwow {padding:0}
+.css-1xc3v61-indicatorContainer {padding-right: 0!important;}
+.css-1dimb5e-singleValue { text-align: left;}
