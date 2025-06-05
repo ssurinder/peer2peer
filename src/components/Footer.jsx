@@ -30,7 +30,7 @@ const Footer = () => {
           }
         >
           <FaUserFriends size={20} />
-          <span>P2P</span>
+          <span>{t('P2p')}</span>
         </NavLink>
 
         <NavLink
@@ -42,11 +42,11 @@ const Footer = () => {
           }
         >
           <FiList size={20} />
-          <span>Orders</span>
+          <span>{t('Orders')}</span>
         </NavLink>
 
         <NavLink
-          to="/ad"
+          to="/createads"
           className={({ isActive }) =>
             isActive
               ? 'flex flex-col items-center text-blue-600'
@@ -54,7 +54,7 @@ const Footer = () => {
           }
         >
           <FiSpeaker size={20} />
-          <span>Ad</span>
+          <span>{t('ad')}</span>
         </NavLink>
 
         <NavLink
@@ -66,7 +66,7 @@ const Footer = () => {
           }
         >
           <FiUser size={20} />
-          <span>{t('profile')}</span>
+        <span>{t('profile')}</span>
         </NavLink>
       </div>
     );
@@ -85,7 +85,7 @@ const Footer = () => {
           }
         >
           <FaUserFriends size={20} />
-          <span>P2P</span>
+          <span>{t('P2p')}</span>
         </NavLink>
 
         <NavLink
@@ -97,11 +97,11 @@ const Footer = () => {
           }
         >
           <FiList size={20} />
-          <span>Orders</span>
+          <span>{t('Orders')}</span>
         </NavLink>
 
         <NavLink
-          to="/ad"
+          to="/createads"
           className={({ isActive }) =>
             isActive
               ? 'flex flex-col items-center text-blue-600'
@@ -109,7 +109,7 @@ const Footer = () => {
           }
         >
           <FiSpeaker size={20} />
-          <span>Ad</span>
+          <span>{t('ad')}</span>
         </NavLink>
 
         <NavLink
