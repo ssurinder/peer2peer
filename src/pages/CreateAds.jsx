@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { t, setLang } from '../components/i18n'
-import { Link } from 'react-router-dom';
-import checkIcon from '../assets/images/checkIcon.png'
+import { t } from '../components/i18n'
 
 const CreateAds = () => {
-    const [price, setPrice] = useState(82.51);
+    const [price] = useState(82.51);
   const [minLimit, setMinLimit] = useState(1000);
   const [maxLimit, setMaxLimit] = useState(5000);
   const [availableAmount] = useState("10,000");
@@ -14,7 +12,7 @@ const CreateAds = () => {
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
-      <div className='h-[calc(100vh_-_60px)] overflow-auto w-full bg-[var(--primary)] '>
+      <div className='h-[calc(100vh_-_56px)] overflow-auto w-full bg-[var(--primary)] '>
         <Header />
         <div className='w-full bg-[var(--primary)] rounded-t-xl relative z-[1]'>
             <div className='w-full pt-3'>

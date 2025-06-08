@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import { t, setLang } from '../components/i18n';
+import { t } from '../components/i18n';
 import { FaThumbsUp, FaCrown, FaShareAlt, FaCog } from 'react-icons/fa';
-import {getData, postData } from '../api/protectedApi'
+import {getData } from '../api/protectedApi'
 const Profile = () => {
     const reviews = new Array(7).fill({
   id: 'P2P-9sff6wo',
@@ -19,7 +19,7 @@ useEffect(() => {
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
-      <div className='h-[calc(100vh_-_60px)] overflow-auto w-full bg-[var(--primary)] '>
+      <div className='h-[calc(100vh_-_56px)] overflow-auto w-full bg-[var(--primary)] '>
         <Header />
       <div className=' w-full bg-[var(--primary)] rounded-t-xl relative z-[1] pt-3'>
         <div className="flex items-center justify-between">
