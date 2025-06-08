@@ -5,14 +5,20 @@
     --gradient-1: #FDFDFD;
     --gradient-2: #C1D0FF;
     --button-gradient-1: #4672FF;
-    --bg-color: #1560ff;
     --button-gradient-2: #59FFDE;
+    --red: #E60B28;
+    --button-light: #ECECEC;
+    --success: #2EBD85;
+    --bg-color: #1560ff;   
     --border-color: #6E6A6A;
+    --border-light: #D8DCE1;
     --link-color: #014cec;
-    --text-color: #575757;
-    --primary: #F8F8F8;
+    --tab-color: #575757;
+    --text-color: #6E6E6E;
+    --primary: #F8FAFF;
     --logout: #A80606;
     --delete: #FFD5D5;
+    --btn-disable: #B0B0B0;
   }
 /*   
   @media (prefers-color-scheme: dark) {
@@ -34,3 +40,7 @@ body {
 .css-hlgwow {padding:0}
 .css-1xc3v61-indicatorContainer {padding-right: 0!important;}
 .css-1dimb5e-singleValue { text-align: left;}
+#headlessui-portal-root {
+  
+  z-index: 9;
+}

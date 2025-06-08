@@ -13,8 +13,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 const Signup = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
 
   const navigate = useNavigate();
   const [sponsorId, setSponserId] = useState('');

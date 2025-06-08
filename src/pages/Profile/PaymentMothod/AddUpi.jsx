@@ -11,7 +11,7 @@ const AddUpi = () => {
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black ">
-      <div className='h-[calc(100vh_-_60px)] overflow-auto w-full bg-[var(--primary)] '>
+      <div className='h-[calc(100vh_-_56px)] overflow-auto w-full bg-[var(--primary)] '>
         <Header />
         <div className='w-full bg-[var(--primary)] rounded-t-xl relative z-[1]'>
             <div className='w-full pt-3'>

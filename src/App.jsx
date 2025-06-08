@@ -15,6 +15,7 @@ import PaymentMethod from './pages/Profile/PaymentMethod';
 import AddBank from './pages/Profile/PaymentMothod/AddBank';
 import AddUpi from './pages/Profile/PaymentMothod/AddUpi';
 import CreateAds from './pages/CreateAds';
+import DealDetail from './components/DealDetail';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -37,6 +38,8 @@ const App = () => {
         <Route path="/paymentmethod" element={<PaymentMethod />} />
         <Route path='/addbank' element={<AddBank />} />
         <Route path='/addupi' element={<AddUpi />} />
+        <Route path='/deal-detail' element={<DealDetail />} />
+        
       </Route>
     </Routes>
   );
