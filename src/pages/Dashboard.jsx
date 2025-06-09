@@ -8,7 +8,7 @@ import Deal from '../components/Deal';
 
 
 const Dashboard = () => {  
-  const [activeTab, setActiveTab] = useState("accept");
+  const [activeTab, setActiveTab] = useState("deal");
   
   return (    
           <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
