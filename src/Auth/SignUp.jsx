@@ -27,8 +27,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+    // setLoading(true);
+    // setError('');
     try {
       let formData = {
         name : name,
@@ -49,11 +49,11 @@ const Signup = () => {
       }
       // navigate("/login");
     } catch (err) {
-      setError(err.message);
+      // setError(err.message);
       toast.error(err.message);
       
     }finally {
-      setLoading(false);
+      // setLoading(false);
     }  
   };
 

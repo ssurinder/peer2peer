@@ -1,5 +1,9 @@
-const BASE_URL = "https://api.coinp2ptrader.com/api/";
-// const BASE_URL = "http://192.168.1.3:8800/api/";
+//const BASE_URL = "https://api.coinp2ptrader.com/api/";
+const BASE_URL = "http://192.168.1.5:8800/api/";
+
+// const TOKEN = localStorage.getItem("auth_token");
+
+
 
 export async function registerUser (data ){
     console.log(' data is '  , data)
@@ -50,6 +54,32 @@ export async function validateSponser (sponserId){
     const res = await fetch(`${BASE_URL}user/getUser?userId=`+sponserId,{
         method:"GET",
         headers:{ "Content-Type": "application/json" },
+    })
+    return res.json()
+}
+export async function CreateDeal (data ){
+   const TOKEN = localStorage.getItem("auth_token");
+    console.log({TOKEN});
+    
+    const res = await fetch(`${BASE_URL}user/createDeal`,{
+        method:"POST",
+        headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${TOKEN}`,
+    },
+    
+        body: JSON.stringify(data),
+    })
+    return res.json()
+}
+export async function myDeals (){
+    const TOKEN = localStorage.getItem("auth_token");
+    const res = await fetch(`${BASE_URL}user/myDeals`,{
+        method:"GeT",
+        headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${TOKEN}`,
+    },
     })
     return res.json()
 }
