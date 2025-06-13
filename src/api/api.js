@@ -81,6 +81,8 @@ export async function myDeals (){
       "Authorization": `Bearer ${TOKEN}`,
     },
     })
+    console.log({res});
+    
     return res.json()
 }
 export async function getWalletAddress (){
