@@ -83,3 +83,25 @@ export async function myDeals (){
     })
     return res.json()
 }
+export async function getWalletAddress (){
+    const TOKEN = localStorage.getItem("auth_token");
+    const res = await fetch(`${BASE_URL}user/getWalletAddress`,{
+        method:"GeT",
+        headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${TOKEN}`,
+    },
+    })
+    return res.json()
+}
+export async function depositTxn (){
+    const TOKEN = localStorage.getItem("auth_token");
+    const res = await fetch(`${BASE_URL}user/depositTxn`,{
+        method:"GeT",
+        headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${TOKEN}`,
+    },
+    })
+    return res.json()
+}

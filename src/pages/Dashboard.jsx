@@ -5,10 +5,17 @@ import UsdtIcon from '../assets/images/usdt.png'
 import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 import Deal from '../components/Deal';
+import { Link } from 'react-router-dom';
+import Deposite from './Saller/Deposite';
+import PaymentHistory from './Profile/PaymentHistory';
+import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {  
   const [activeTab, setActiveTab] = useState("deal");
+  const [depositeList, setDepositeList] = useState();
+  const [showPaymentHistory] = useState(false);
+  const navigate = useNavigate();
   
   return (    
           <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
@@ -48,10 +55,24 @@ const Dashboard = () => {
                 <div className='flex flex-col px-4'>
                 {activeTab === "deal" && (
                   <>
-                  <Deal />
-                  </>
-                  
-                )}
+                  {!showPaymentHistory ? (
+      <>
+        <Deal />
+        <Link onClick={() => setDepositeList(true)}>Deposite</Link>
+        <Deposite
+          isOpen={depositeList}
+  onClose={() => setDepositeList(false)}
+  onUploadConfirm={() => {
+    setDepositeList(false);
+    navigate("/paymenthistory"); // 👈 Navigate to the new route
+  }}
+        />
+      </>
+    ) : (
+      <PaymentHistory />
+    )}
+  </>
+)}
                 {activeTab === "accept" && (
                   <div className="border border-[var(--bg-color)] rounded-lg p-4 shadow-sm relative overflow-hidden">
                     <div className="absolute top-0 right-0 text-xs bg-blue-100 text-blue-600 px-2 py-0.5 border-r-xl pl-4 rounded-bl-full text-[8px] font-semibold leading-4">Featured Deal</div>

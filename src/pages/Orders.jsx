@@ -41,8 +41,6 @@ const processingOrders = [
     price: '$50,000.00',
     quantity: '200000 BTC',
     order: '321321321321',
-   
-    
   },
 ];
 
