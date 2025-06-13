@@ -11,6 +11,7 @@ if (rootEl) {
     <React.StrictMode> 
       <AuthProvider>
         <BrowserRouter> 
+        
             <App /> 
         </BrowserRouter>
       </AuthProvider> 

@@ -13,7 +13,8 @@ import LogoutIcon from '../../assets/svgs/logout.svg'
 import InformationIcon from '../../assets/svgs/info.svg'
 import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from "react-router-dom"
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
 
 const Settings = () => {
   const navigate = useNavigate()

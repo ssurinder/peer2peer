@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom';
 import { t } from '../components/i18n';
 import { FaThumbsUp, FaCrown, FaShareAlt, FaCog } from 'react-icons/fa';
 import {getData } from '../api/protectedApi'
+
+const tabs = [
+  { key: 'info', label: 'Info' },
+  { key: 'team', label: 'Team' },
+  { key: 'ads', label: 'Ads (10)' },
+  { key: 'feedback', label: 'Feedback (20)' },
+  { key: 'followers', label: 'Followers (20)' },
+];
 const Profile = () => {
     const reviews = new Array(7).fill({
   id: 'P2P-9sff6wo',
@@ -16,6 +24,9 @@ useEffect(() => {
     .then((res) => {setData(res.data.data),console.log('data ' , res.data.data)})
     .catch((err) => console.error(err));
 }, []);
+
+
+const [activeTab, setActiveTab] = useState('info');
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
     <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
@@ -60,28 +71,38 @@ useEffect(() => {
         </div>
 
         {/* Tabs */}
-        <div className='w-full block border-b overflow-auto'>
-        <div className="mt-6 flex gap-4 text-sm text-gray-600 w-full flex-nowrap ">
-          <button className="pb-2 text-nowrap text-base font-semibold ml-3">Info</button>
-          <button className="pb-2 text-nowrap text-base font-semibold">Ads (10)</button>
-          <button className="pb-2 text-nowrap text-base font-semibold border-b-2 border-blue-500 text-blue-600">
-            Feedback (20)
+      <div className="flex space-x-4 border-b border-gray-300 text-sm font-medium overflow-auto">
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`py-2 px-1 text-black relative text-nowrap ${
+              activeTab === tab.key ? 'font-semibold' : 'text-gray-500 '
+            }`}
+          >
+            {tab.label}
+            {activeTab === tab.key && (
+              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-600" />
+            )}
           </button>
-          <button className="pb-2 text-nowrap text-base font-semibold">Followers (20)</button>
-          <button className="pb-2 text-nowrap text-base font-semibold">Following (5)</button>
-        </div>
-        </div>
+        ))}
+      </div>
 
-        {/* Stats */}
-        <div className='px-4'>
+      {/* Content */}
+      <div className="mt-4 text-sm text-gray-700 px-4">
+        {activeTab === 'info' && <div>Info content goes here...</div>}
+        {activeTab === 'team' && <div>Team content goes here...</div>}
+        {activeTab === 'ads' && <div>Ads (10) content goes here...</div>}
+        {activeTab === 'feedback' && <div> {/* Stats */}
+        
         <div className="my-4 border border-gray-300 rounded-xl p-3 flex items-center justify-center space-x-2 text-sm  ">
           <FaThumbsUp className="text-green-600" />
           <span className="font-medium">55.05%</span>
           <span className="text-gray-500">| (90) Review(s)</span>
-        </div></div>
+        </div>
 
         {/* Filters */}
-        <div className="flex space-x-4 text-sm mb-2  px-4">
+        <div className="flex space-x-4 text-sm mb-2">
           <button className="font-normal text-sm px-2 py-1 rounded-md text-black bg-gray-200">All</button>
           <button className="font-normal text-sm px-2 py-1 rounded-md text-gray-500 ">Positives (55)</button>
           <button className="font-normal text-sm px-2 py-1 rounded-md text-gray-500">Negative (10)</button>
@@ -92,7 +113,7 @@ useEffect(() => {
           {reviews.map((review, i) => (
             <div
               key={i}
-              className="flex justify-between items-center bg-gray-50 px-4 py-2 rounded"
+              className="flex justify-between items-center bg-gray-50 py-2 rounded"
             >
               <div className="flex items-center gap-2 text-sm">
                 <div className="bg-gray-700 text-white text-xs px-2 py-1 rounded">
@@ -106,7 +127,11 @@ useEffect(() => {
               <FaThumbsUp className="text-green-600" />
             </div>
           ))}
-        </div>
+        </div></div>}
+        {activeTab === 'followers' && <div>Followers (20) content goes here...</div>}
+      </div>
+
+       
 
       </div>
  </div>
