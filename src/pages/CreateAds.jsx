@@ -19,9 +19,9 @@ const CreateAds = () => {
 
     const payload = {
       price:Number(price),
-      minLimit: Number(minLimit),
-      maxLimit: Number(maxLimit),
-      availableAmount: Number(availableAmount.replace(/,/g, '')), // remove comma
+      minLimit: 10 , // Number(minLimit),
+      maxLimit: parseInt(maxLimit),
+      availableAmount: 100,//Number(availableAmount.replace(/,/g, '')), // remove comma
       paymentMethods: paymentMethod,
     };
     console.log(payload, 'payload');
@@ -29,7 +29,7 @@ const CreateAds = () => {
      let response = await CreateDeal(payload);
 
       // const data = await response.json();
-console.log(response?.message);
+      console.log(response?.message);
 
       if (response.success === true) {
       toast.success(response.message); 
@@ -55,35 +55,51 @@ console.log(response?.message);
                 {/* Fixed Price */}
                 <div>
                   <label className="block mb-1 text-base font-normal">Fixed price</label>
-  <div className="flex items-center border border-gray-300 bg-white rounded px-3 py-2">
-    <button
-      className="text-lg font-bold px-2"
-      type="button"
-      onClick={() => setPrice((prev) => Math.max(0, (parseFloat(prev) - 1).toFixed(2)))}
-    >
-      -
-    </button>
-    <input
-      type="number"
-      step="0.01"
-      value={price}
-      onChange={(e) => setPrice(e.target.value)}
-      className="flex-1 text-center text-base font-normal text-black focus:outline-none"
-    />
-    <button
-      className="text-lg font-bold px-2"
-      type="button"
-      onClick={() => setPrice((prev) => (parseFloat(prev) + 1).toFixed(2))}
-    >
-      +
-    </button>
-  </div>
+                  <div className="flex items-center border border-gray-300 bg-white rounded px-3 py-2">
+                    <button
+                      className="text-lg font-bold px-2"
+                      type="button"
+                      onClick={() => setPrice((prev) => Math.max(0, (parseFloat(prev) - 1).toFixed(2)))}
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      className="flex-1 text-center text-base font-normal text-black focus:outline-none"
+                    />
+                    <button
+                      className="text-lg font-bold px-2"
+                      type="button"
+                      onClick={() => setPrice((prev) => (parseFloat(prev) + 1).toFixed(2))}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
 
                 {/* Limit Amount */}
                 <label className="block mb-1 text-base font-normal">Limit amount</label>
                 <div className="flex items-center gap-2 w-full justify-between">
-                  <div className="relative flex-1 border border-gray-300 bg-white rounded-md px-3 py-2">
+                  <select
+                    className="w-full border border-gray-300 bg-white rounded px-3 py-2 font-normal text-black"
+                    value={paymentMethod}
+                    onChange={(e) => {
+                      const selected = Array.from(e.target.selectedOptions, option => option.value);
+                      setMaxLimit(selected);
+                    }}
+                    required
+                  >
+                    {/* <option value="">Amount</option> */}
+                    <option value="0">Choose Amount</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                  </select>
+                  {/* <div className="relative flex-1 border border-gray-300 bg-white rounded-md px-3 py-2">
+                    
                     <input
                       type="number"
                       value={minLimit}
@@ -101,7 +117,7 @@ console.log(response?.message);
                       className="font-normal text-black w-full pr-6"
                     />
                     <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-400">max.</span>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Available Amount */}
@@ -110,8 +126,9 @@ console.log(response?.message);
                   <div className="flex justify-between items-center border border-gray-300 bg-white rounded px-3 py-2">
                   <input
                       type="number"
-                      value={availableAmount}
+                      value="100"
                       onChange={(e) => setavailableAmount(e.target.value)}
+                      readOnly
                       className="font-normal text-black w-full pr-6"
                     />
                     
@@ -126,9 +143,9 @@ console.log(response?.message);
                     className="w-full border border-gray-300 bg-white rounded px-3 py-2 font-normal text-black"
                     value={paymentMethod}
                     onChange={(e) => {
-      const selected = Array.from(e.target.selectedOptions, option => option.value);
-      setPaymentMethod(selected);
-    }}
+                      const selected = Array.from(e.target.selectedOptions, option => option.value);
+                      setPaymentMethod(selected);
+                    }}
                     required
                   >
                     <option value="">Select payment method</option>

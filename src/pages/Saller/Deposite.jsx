@@ -3,7 +3,7 @@ import CopyIcon from '../../assets/images/copy_icon.png';
 import { getWalletAddress } from '../../api/api';
 import { ToastContainer, toast } from 'react-toastify';
 import QRCode from 'qrcode';
-
+import { postData } from '../../api/protectedApi';
 const Deposite = ({ isOpen, onClose, onUploadConfirm }) => {
   if (!isOpen) return null;
 
@@ -14,7 +14,23 @@ const Deposite = ({ isOpen, onClose, onUploadConfirm }) => {
     onClose();             // Close modal
     onUploadConfirm();     // Tell parent to show PaymentHistory
   };
-
+  const checkNewDeposit = async() => {
+        try{
+         const res = await postData('/user/checkDeposit', {address:walletValue});
+             if(res.data.success == true)
+                toast.success(res.data.message)
+              else
+                toast.error(res.data.message)
+              // .then((res) => { 
+              //    console.log('data ', res) 
+              
+              //   })
+              // .catch((err) => toast.error(err));
+        }catch(e){
+         toast.error(e.message);
+        }
+         
+  }
   const getWalletAmount = async () => {
     try {
       const response = await getWalletAddress();
@@ -60,6 +76,7 @@ const Deposite = ({ isOpen, onClose, onUploadConfirm }) => {
                 <span className='mb-2 text-black'>Deposit BEP20 USDT only</span>
                 <div className='flex items-center gap-2 relative border border-[var(--border-light)] py-2 px-3 cursor-default rounded-lg bg-transparent text-left shadow-none focus:outline-none sm:text-sm justify-between'>
                   <span className='text-ellipsis overflow-hidden text-nowrap'>{walletValue}</span>
+                  
                   <button onClick={() => {
                     if (walletValue) {
                       navigator.clipboard.writeText(walletValue);
@@ -73,6 +90,7 @@ const Deposite = ({ isOpen, onClose, onUploadConfirm }) => {
                 </div>
               </div>
             </div>
+            <button onClick={checkNewDeposit}>Balance</button>
             <button onClick={handleDepositeValue} className="w-full py-2 mt-6 rounded-lg bg-[var(--bg-color)] text-white font-normal text-base hover:bg-blue-700">
               Payment History
             </button>

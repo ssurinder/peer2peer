@@ -56,22 +56,22 @@ const Dashboard = () => {
                 {activeTab === "deal" && (
                   <>
                   {!showPaymentHistory ? (
-      <>
-        <Deal />
-        <Link onClick={() => setDepositeList(true)}>Deposite</Link>
-        <Deposite
-          isOpen={depositeList}
-  onClose={() => setDepositeList(false)}
-  onUploadConfirm={() => {
-    setDepositeList(false);
-    navigate("/paymenthistory"); // 👈 Navigate to the new route
-  }}
-        />
-      </>
-    ) : (
-      <PaymentHistory />
-    )}
-  </>
+                  <>
+                    <Deal />
+                    <Link onClick={() => setDepositeList(true)}>Deposit</Link>
+                    <Deposite
+                            isOpen={depositeList}
+                            onClose={() => setDepositeList(false)}
+                            onUploadConfirm={() => {
+                              setDepositeList(false);
+                              navigate("/paymenthistory"); // 👈 Navigate to the new route
+                            }}
+                    />
+                  </>
+                ) : (
+                  <PaymentHistory />
+                )}
+              </>
 )}
                 {activeTab === "accept" && (
                   <div className="border border-[var(--bg-color)] rounded-lg p-4 shadow-sm relative overflow-hidden">

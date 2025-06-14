@@ -1,5 +1,5 @@
-//const BASE_URL = "https://api.coinp2ptrader.com/api/";
-const BASE_URL = "http://192.168.1.5:8800/api/";
+const BASE_URL = "https://api.coinp2ptrader.com/api/";
+// const BASE_URL = "http://192.168.1.5:8800/api/";
 
 // const TOKEN = localStorage.getItem("auth_token");
 

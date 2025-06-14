@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Logo from '../assets/svgs/logo.svg'; 
 import VarifyIcon from '../assets/images/varify.png'; 
 import { useNavigate } from "react-router-dom"; 
-import { loginUser } from "../api/api"; 
+import { forgotPassword } from "../api/api"; 
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
@@ -19,7 +19,7 @@ const ForgotPassword = () => {
     setLoading(true);
     setError(''); 
     try { 
-        let response = await loginUser({email :email}) 
+        let response = await forgotPassword({email :email}) 
         console.log( ' response ' ,response)
         if (response.success == false) {
           toast.error(response.message);
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
                     {loading ? 'Signing in...' : 'Sign in'}
                   </button>
                 </div>
-                <p>Back to<Link to="/login">Login</Link></p> 
+                <p>Back to <Link to="/login">Login</Link></p> 
               </form>
             </div>
             </> 
