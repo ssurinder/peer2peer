@@ -1,6 +1,45 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
+@layer utilities {
+  @keyframes floatY {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+  }
+
+  .animate-float {
+    animation: floatY 2s ease-in-out infinite;
+  }
+  @keyframes trans {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .animate-trans {
+    animation: trans 2s ease-in-out infinite;
+  }
+  @keyframes pulseScale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(.9);
+    }
+  }
+
+  .animate-pulse-scale {
+    animation: pulseScale 2s ease-in-out infinite;
+  }
+}
+
 :root {
     --gradient-1: #FDFDFD;
     --gradient-2: #C1D0FF;
@@ -43,4 +82,14 @@ body {
 #headlessui-portal-root {
   
   z-index: 9;
+}
+.top_banner {
+  background: url('./assets/images/top_banner.png');
+
+}
+.map-globe {
+  background: url('./assets/images/map-globe.png');
+}
+.system_box {
+  flex: 0 0 25%;
 }
