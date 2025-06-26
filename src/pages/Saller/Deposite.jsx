@@ -4,6 +4,9 @@ import { getWalletAddress } from '../../api/api';
 import { ToastContainer, toast } from 'react-toastify';
 import QRCode from 'qrcode';
 import { postData } from '../../api/protectedApi';
+import { FaSyncAlt, FaClipboard, FaHistory } from 'react-icons/fa';
+
+import { Link } from 'react-router-dom';
 const Deposite = ({ isOpen, onClose, onUploadConfirm }) => {
   if (!isOpen) return null;
 
@@ -90,10 +93,21 @@ const Deposite = ({ isOpen, onClose, onUploadConfirm }) => {
                 </div>
               </div>
             </div>
-            <button onClick={checkNewDeposit}>Balance</button>
-            <button onClick={handleDepositeValue} className="w-full py-2 mt-6 rounded-lg bg-[var(--bg-color)] text-white font-normal text-base hover:bg-blue-700">
-              Payment History
-            </button>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600 flex items-center gap-2" onClick={checkNewDeposit}>
+                Balance
+                <button className="hover:text-blue-600">
+                  <FaSyncAlt />
+                </button>
+              </span>
+              <Link
+                to="/paymenthistory"
+                className="flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-md text-sm font-medium"
+              >
+                {/* <FaHistory /> */}
+                Payment History
+              </Link>
+            </div> 
           </div>
         </div>
       </div>

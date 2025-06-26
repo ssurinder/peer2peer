@@ -1,7 +1,7 @@
 // src/utils/api.js
 import axios from 'axios'; 
 const api = axios.create({
-  baseURL: 'https://api.coinp2ptrader.com/api/',
+  baseURL: import.meta.env.VITE_API_URL,//'https://api.coinp2ptrader.com/api/',
 });
 // import { toast } from 'react-toastify';
 api.interceptors.request.use(config => {

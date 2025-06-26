@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { t } from '../components/i18n';
-import {CreateDeal } from '../api/api'
-import { toast } from 'react-toastify';
-
+import {CreateDeal } from '../api/api' 
+import { getData } from '../api/protectedApi';
+import { ToastContainer, toast } from 'react-toastify';
 const CreateAds = () => {
   
   const [price, setPrice] = useState(0);
@@ -12,16 +12,20 @@ const CreateAds = () => {
   const [maxLimit, setMaxLimit] = useState(0);
   const [availableAmount, setavailableAmount] = useState(0);
   
+  
   const [paymentMethod, setPaymentMethod] = useState([]);
+  const [bankInfo, setBankInfo] = useState(null);
+    useEffect(() => {
+      getData('/user/bankDetails', {}) .then((res) => { setBankInfo(res.data.data)}) .catch((err) => console.error(err));
+      getData('/user/userBalance?type=WALLET', {}) .then((res) => { setavailableAmount(res.data.data , console.log(' aaa ' , res.data))}) .catch((err) => console.error(err));
+    }, []);
 
   const handleCreateAd = async (e) => {
     e.preventDefault();
 
     const payload = {
-      price:Number(price),
-      minLimit: 10 , // Number(minLimit),
-      maxLimit: parseInt(maxLimit),
-      availableAmount: 100,//Number(availableAmount.replace(/,/g, '')), // remove comma
+      price:Number(price), 
+      availableAmount: parseInt(maxLimit),//Number(availableAmount.replace(/,/g, '')), // remove comma
       paymentMethods: paymentMethod,
     };
     console.log(payload, 'payload');
@@ -31,11 +35,12 @@ const CreateAds = () => {
       // const data = await response.json();
       console.log(response?.message);
 
-      if (response.success === true) {
-      toast.success(response.message); 
+      if (response.success == true) {
+         toast.success(response?.message); 
         // You can reset the form or navigate
       } else {
-        alert('Failed to create deal: ' + (response.message || 'Unknown error'));
+        toast.error(response.message); 
+        // alert('Failed to create deal: ' + (response.message || 'Unknown error'));
       }
     } catch (err) {
       console.error(err);
@@ -45,6 +50,7 @@ const CreateAds = () => {
 
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">  
         <div className='h-[calc(100vh_-_56px)] overflow-auto w-full bg-[var(--primary)] '>
           <Header />
@@ -85,7 +91,7 @@ const CreateAds = () => {
                 <div className="flex items-center gap-2 w-full justify-between">
                   <select
                     className="w-full border border-gray-300 bg-white rounded px-3 py-2 font-normal text-black"
-                    value={paymentMethod}
+                    value={maxLimit}
                     onChange={(e) => {
                       const selected = Array.from(e.target.selectedOptions, option => option.value);
                       setMaxLimit(selected);
@@ -122,11 +128,11 @@ const CreateAds = () => {
 
                 {/* Available Amount */}
                 <div>
-                  <label className="block mb-1 text-base font-normal">Available amount</label>
+                  <label className="block mb-1 text-base font-normal">Funding Wallet</label>
                   <div className="flex justify-between items-center border border-gray-300 bg-white rounded px-3 py-2">
                   <input
                       type="number"
-                      value="100"
+                      value={availableAmount}
                       onChange={(e) => setavailableAmount(e.target.value)}
                       readOnly
                       className="font-normal text-black w-full pr-6"
@@ -154,6 +160,19 @@ const CreateAds = () => {
                     <option value="BANK_TO_BANK,UPI">Both</option>
                   </select>
                 </div>
+
+                 <div class="bg-gray-50 p-5 rounded-xl shadow-inner">
+                  <h3 class="text-lg font-bold text-blue-600 mb-4 flex items-center gap-2">
+                    🏦 Bank Details
+                  </h3>
+                  <ul class="text-sm text-gray-700 space-y-2">
+                    <li><span class="font-medium">👤 Name:</span> {bankInfo?.name}</li>
+                    <li><span class="font-medium">🏛️ Bank:</span> {bankInfo?.bankName}</li>
+                    <li><span class="font-medium">🔢 Account #:</span> {bankInfo?.accountNumber}</li>
+                    <li><span class="font-medium">🏷️ IFSC:</span>  {bankInfo?.ifscCode}</li>
+                    <li><span class="font-medium">📲 UPI:</span> {bankInfo?.upi}</li>
+                  </ul>
+                </div> 
 
                 <button type="submit" className="mt-4 w-full rounded-xl py-3 px-4 text-base leading-5 text-white font-normal cursor-pointer bg-[var(--bg-color)]">
                   {t('CreateAd')}

@@ -27,6 +27,7 @@ const Header = () => {
     { name: 'About', href: '#', current: false },
     { name: 'Products', href: '#', current: false },
     { name: 'Contact', href: '#', current: false },
+    { name: 'Why P2P', href: '/whyp2p', current: false },
   ];
 
   const classNames = (...classes) => classes.filter(Boolean).join(' ');
@@ -39,10 +40,10 @@ const Header = () => {
         <img src={LogoWhite} alt="Logo" className="h-8" />
         <Menu as="div" className="z-10 relative">
           <MenuButton className="inline-flex items-center gap-2 rounded-md border border-white px-2 py-1.5 text-sm font-semibold text-white ">
-    {selected.flag && <img src={selected.flag} className="w-5 h-5" alt="flag" />}
-    {selected.code}
-    <ChevronDownIcon className="w-4 h-4 ml-1" />
-  </MenuButton>
+            {selected.flag && <img src={selected.flag} className="w-5 h-5" alt="flag" />}
+            {selected.code}
+            <ChevronDownIcon className="w-4 h-4 ml-1" />
+          </MenuButton>
 
         <MenuItems  as="div"
           transition
@@ -105,7 +106,7 @@ const Header = () => {
                 ))}
                 <Link
                   to="/splash"
-                  className="rounded-xl py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
+                  className="hidden rounded-xl py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
                 >
                   Login/Register
                 </Link>
@@ -125,7 +126,7 @@ const Header = () => {
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
                 item.current
-                  ? 'bg-gray-900 text-white'
+                  ? 'bg-blue-900 text-white'
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 'block rounded-md px-3 py-2 text-base font-medium'
               )}
@@ -135,7 +136,7 @@ const Header = () => {
           ))}
           <Link
             to="/splash"
-            className="rounded-xl block py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
+            className="hidden rounded-xl block py-3 px-6 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]"
           >
             Login/Register
           </Link>

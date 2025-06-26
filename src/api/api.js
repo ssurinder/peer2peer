@@ -1,9 +1,4 @@
-const BASE_URL = "https://api.coinp2ptrader.com/api/";
-// const BASE_URL = "http://192.168.1.5:8800/api/";
-
-// const TOKEN = localStorage.getItem("auth_token");
-
-
+const BASE_URL =import.meta.env.VITE_API_URL; 
 
 export async function registerUser (data ){
     console.log(' data is '  , data)
@@ -15,7 +10,7 @@ export async function registerUser (data ){
     return res.json(); 
 }
 
-export async function loginUser (data){ 
+export async function loginUser (data){  
     const res = await fetch(`${BASE_URL}user/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -57,6 +52,8 @@ export async function validateSponser (sponserId){
     })
     return res.json()
 }
+
+/** we have to delete these reset functions */
 export async function CreateDeal (data ){
    const TOKEN = localStorage.getItem("auth_token");
     console.log({TOKEN});

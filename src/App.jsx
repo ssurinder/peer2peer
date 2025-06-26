@@ -4,6 +4,7 @@ import Splash from './Splash';
 import Login from './Auth/Login';
 import SignUp from './Auth/SignUp'; 
 import Home from './Home'; 
+import WhyP2p from './landing_pages/whyp2p';
 import Dashboard from "./pages/Dashboard";
 import Profile from './pages/Profile';
 import Settings from './pages/Profile/Settings';
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/whyp2p" element={<WhyP2p />} />
       <Route path="/splash" element={<Splash />} />
       <Route path="/login" element={<Login />} />
       <Route path="/veify_signup" element={<VerifySignup />} />

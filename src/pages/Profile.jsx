@@ -3,6 +3,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { t } from '../components/i18n';
+import Profiledata from './Profile/profileData'
+import ComingSoon from '../components/ComingSoon'
+import MyAds from './Profile/myAds'
+import Deposite from './Saller/Deposite';
 import { FaThumbsUp, FaCrown, FaShareAlt, FaCog } from 'react-icons/fa';
 import { getData } from '../api/protectedApi'
 import { myDeals } from '../api/api';
@@ -12,49 +16,26 @@ const tabs = [
   { key: 'info', label: 'Info' },
   { key: 'team', label: 'Team' },
   { key: 'ads', label: 'Ads (10)' },
-  { key: 'feedback', label: 'Feedback (20)' },
-  { key: 'followers', label: 'Followers (20)' },
+  { key: 'deposit', label: 'Deposit' },
+  // { key: 'feedback', label: 'Feedback (20)' },
+  // { key: 'followers', label: 'Followers (20)' },
 ];
 const Profile = () => {
-  const reviews = new Array(7).fill({
-    id: 'P2P-9sff6wo',
-    date: '25-05-2025',
-  });
-  const [data, setData] = useState(null);
+  // const reviews = new Array(7).fill({
+  //   id: 'P2P-9sff6wo',
+  //   date: '25-05-2025',
+  // });
+  const [profile, setProfileData] = useState(null);
   useEffect(() => {
     getData('/user/userProfile', {})
-      .then((res) => { setData(res.data.data), console.log('data ', res.data.data) })
+      .then((res) => { setProfileData(res.data.data), console.log('data ', res.data.data) })
       .catch((err) => console.error(err));
   }, []);
+ 
 
-
-
-  const [activeTab, setActiveTab] = useState('info');
-  const [Mydeals, setMydeals] = useState('');
-  
-
-  const handleCreateAd = async () => {
-
-    try {
-      let response = await myDeals();
-      if (response.success === true) {
-setMydeals(response?.data)
-
-        // You can reset the form or navigate
-      } else {
-        alert('Failed to create deal: ' + (response.message || 'Unknown error'));
-      }
-    } catch (err) {
-      console.error(err);
-      // alert('An error occurred while creating the deal.');
-    }
-  };
-  
-  
-
-  useEffect(() => {
-    handleCreateAd()
-  }, []);
+  const [depositeList, setDepositeList] = useState();
+  const [activeTab, setActiveTab] = useState('info'); 
+   
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
       <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">
@@ -79,7 +60,7 @@ setMydeals(response?.data)
                 </div>
                 <div className='w-full mt-3  px-4'>
                   <h2 className="font-semibold text-lg flex items-center gap-1">
-                    {t('hello')} {data?.data.name}
+                    {t('hello')} {profile?.data.name}
                     <img
                       src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png"
                       alt="verified"
@@ -91,7 +72,7 @@ setMydeals(response?.data)
                   </span>
                   <div className="text-sm mt-1 flex items-center gap-2">
                     <FaCrown className="text-yellow-500" />
-                    Premium Member · Deposit 5000 USDT
+                    {/* Premium Member · Deposit 5000 USDT */}
                   </div>
                 </div>
               </div>
@@ -117,9 +98,20 @@ setMydeals(response?.data)
 
             {/* Content */}
             <div className="mt-4 text-sm text-gray-700 px-4">
-              {activeTab === 'info' && <div>Info content goes here...</div>}
-              {activeTab === 'team' && <div>Team content goes here...</div>}
-              {activeTab === 'ads' && <>
+              {activeTab === 'info' && <Profiledata data={profile?.data}/>}
+              {activeTab === 'team' && <ComingSoon/>} 
+              {activeTab === 'ads' && <MyAds/>}
+              {activeTab === 'deposit' && <><Link onClick={() => setDepositeList(true)}>Deposit</Link>
+                            <Deposite
+                                    isOpen={depositeList}
+                                    onClose={() => setDepositeList(false)}
+                                    onUploadConfirm={() => {
+                                      setDepositeList(false);
+                                      navigate("/paymenthistory"); // 👈 Navigate to the new route
+                                    }}
+                            /></>}
+              {/* {activeTab === 'feedback' && <ComingSoon/>} */}
+              {/* {activeTab === 'ads' && <>
                 {Mydeals.map((myDeal, i) => (
                   <div className='flex' key={i}>
                     <span>{myDeal.price}</span>
@@ -129,43 +121,9 @@ setMydeals(response?.data)
 
                   </div>
                 ))}
-              </>}
-              {activeTab === 'feedback' && <> {/* Stats */}
-
-                <div className="my-4 border border-gray-300 rounded-xl p-3 flex items-center justify-center space-x-2 text-sm  ">
-                  <FaThumbsUp className="text-green-600" />
-                  <span className="font-medium">55.05%</span>
-                  <span className="text-gray-500">| (90) Review(s)</span>
-                </div>
-
-                {/* Filters */}
-                <div className="flex space-x-4 text-sm mb-2">
-                  <button className="font-normal text-sm px-2 py-1 rounded-md text-black bg-gray-200">All</button>
-                  <button className="font-normal text-sm px-2 py-1 rounded-md text-gray-500 ">Positives (55)</button>
-                  <button className="font-normal text-sm px-2 py-1 rounded-md text-gray-500">Negative (10)</button>
-                </div>
-
-                {/* Feedback List */}
-                <div className="space-y-3">
-                  {reviews.map((review, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-center bg-gray-50 py-2 rounded"
-                    >
-                      <div className="flex items-center gap-2 text-sm">
-                        <div className="bg-gray-700 text-white text-xs px-2 py-1 rounded">
-                          P
-                        </div>
-                        <div className='flex items-center gap-3'>
-                          <p className="font-medium">{review.id}</p>
-                          <p className="text-gray-400 text-xs">{review.date}</p>
-                        </div>
-                      </div>
-                      <FaThumbsUp className="text-green-600" />
-                    </div>
-                  ))}
-                </div></>}
-              {activeTab === 'followers' && <div>Followers (20) content goes here...</div>}
+              </>} */}
+               
+              {/* {activeTab === 'followers' && <div>Followers (20) content goes here...</div>} */}
             </div>
 
 

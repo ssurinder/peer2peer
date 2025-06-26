@@ -8,14 +8,14 @@ import './index.css'
 const rootEl = document.getElementById('root');
 if (rootEl) {
   ReactDOM.createRoot(rootEl).render(
-    <React.StrictMode> 
+    // <React.StrictMode> 
       <AuthProvider>
         <BrowserRouter> 
         
             <App /> 
         </BrowserRouter>
       </AuthProvider> 
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 } else {
   console.error('❌ Root element with id="root" not found');

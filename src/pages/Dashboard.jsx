@@ -6,15 +6,14 @@ import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 import Deal from '../components/Deal';
 import { Link } from 'react-router-dom';
-import Deposite from './Saller/Deposite';
-import PaymentHistory from './Profile/PaymentHistory';
+// import Deposite from './Saller/Deposite';
+// import PaymentHistory from './Profile/PaymentHistory';
 import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {  
   const [activeTab, setActiveTab] = useState("deal");
-  const [depositeList, setDepositeList] = useState();
-  const [showPaymentHistory] = useState(false);
+  // const [depositeList, setDepositeList] = useState();
   const navigate = useNavigate();
   
   return (    
@@ -41,7 +40,7 @@ const Dashboard = () => {
                         Accept
                       </button>
                       </div>
-                      <span className="text-[var(--red)] text[15px] tracking-tighter font-medium">00:14:59 hrs</span>
+                      {/* <span className="text-[var(--red)] text[15px] tracking-tighter font-medium">00:14:59 hrs</span> */}
                       </div>
                       <div className='shrink-0 flex items-center gap-2'>
                         <button className="text-sm bg-yellow-400 text-black px-1 py-[2px] rounded tracking-tighter font-medium">New Deals</button>
@@ -53,26 +52,12 @@ const Dashboard = () => {
                   <Filter />
                 {/* Trade Card */}
                 <div className='flex flex-col px-4'>
-                {activeTab === "deal" && (
-                  <>
-                  {!showPaymentHistory ? (
-                  <>
-                    <Deal />
-                    <Link onClick={() => setDepositeList(true)}>Deposit</Link>
-                    <Deposite
-                            isOpen={depositeList}
-                            onClose={() => setDepositeList(false)}
-                            onUploadConfirm={() => {
-                              setDepositeList(false);
-                              navigate("/paymenthistory"); // 👈 Navigate to the new route
-                            }}
-                    />
+                {
+                  activeTab === "deal" && (
+                  <><Deal />
                   </>
-                ) : (
-                  <PaymentHistory />
-                )}
-              </>
-)}
+                  )
+                }
                 {activeTab === "accept" && (
                   <div className="border border-[var(--bg-color)] rounded-lg p-4 shadow-sm relative overflow-hidden">
                     <div className="absolute top-0 right-0 text-xs bg-blue-100 text-blue-600 px-2 py-0.5 border-r-xl pl-4 rounded-bl-full text-[8px] font-semibold leading-4">Featured Deal</div>
