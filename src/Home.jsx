@@ -1,13 +1,14 @@
 import React from 'react'
 import Header from './components/Header'
 import Banner from './components/Banner'
+import Reviews from './components/Reviews';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from './components/Footer'
 
 
 const Home = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('auth_token'); // adjust this based on your auth logic
@@ -18,11 +19,12 @@ const Home = () => {
   }, [navigate]);
   return (
     <>
-        <Header />
-        <Banner />
-        <Footer />
+      <Header />
+      <Banner />
+      <Reviews />
+      <Footer />
     </>
-    
+
   )
 }
 

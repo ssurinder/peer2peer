@@ -2,13 +2,13 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Splash from './Splash';
 import Login from './Auth/Login';
-import SignUp from './Auth/SignUp'; 
-import Home from './Home'; 
+import SignUp from './Auth/SignUp';
+import Home from './Home';
 import WhyP2p from './landing_pages/whyp2p';
 import Dashboard from "./pages/Dashboard";
 import Profile from './pages/Profile';
 import Settings from './pages/Profile/Settings';
-import AuthGuard from "./components/AuthGuard"; 
+import AuthGuard from "./components/AuthGuard";
 import VerifySignup from "./Auth/VerifySignUp";
 import ForgotPassword from "./Auth/ForgotPassword"
 import RegisterSuccess from "./Auth/RegisterSuccess"
@@ -21,6 +21,8 @@ import Orders from './pages/Orders';
 import Deposite from './pages/Saller/Deposite';
 import PaymentHistory from './pages/Profile/PaymentHistory';
 import 'react-toastify/dist/ReactToastify.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const App = () => {
   return (
@@ -31,8 +33,8 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/veify_signup" element={<VerifySignup />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/register-success" element={<RegisterSuccess />} /> 
-      
+      <Route path="/register-success" element={<RegisterSuccess />} />
+
       <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route element={<AuthGuard />}>
         <Route path="/dashboard" element={<Dashboard />} />
@@ -46,7 +48,7 @@ const App = () => {
         <Route path='/addupi' element={<AddUpi />} />
         <Route path='/deposite' element={<Deposite />} />
         <Route path='/paymenthistory' element={<PaymentHistory />} />
-        
+
       </Route>
     </Routes>
   );
