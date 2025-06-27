@@ -20,6 +20,13 @@ import DealDetail from './components/DealDetail';
 import Orders from './pages/Orders';
 import Deposite from './pages/Saller/Deposite';
 import PaymentHistory from './pages/Profile/PaymentHistory';
+import Account from './pages/Profile/account';
+import Editprofile from './pages/Profile/account';
+import Notifications from './pages/Profile/notifications';
+import Wallet from './pages/Profile/wallet';
+import Help from './pages/Profile/help';
+import About from './pages/Profile/about';
+
 import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -48,7 +55,12 @@ const App = () => {
         <Route path='/addupi' element={<AddUpi />} />
         <Route path='/deposite' element={<Deposite />} />
         <Route path='/paymenthistory' element={<PaymentHistory />} />
-
+        <Route path='/account' element={<Account />} />
+        <Route path='/editprofile' element={<Editprofile />} />
+        <Route path='/notifications' element={<Notifications />} />
+        <Route path='/wallet' element={<Wallet />} />
+        <Route path='/help' element={<Help />} />
+        <Route path='/about' element={<About />} />
       </Route>
     </Routes>
   );

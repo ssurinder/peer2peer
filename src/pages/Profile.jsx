@@ -31,11 +31,11 @@ const Profile = () => {
       .then((res) => { setProfileData(res.data.data), console.log('data ', res.data.data) })
       .catch((err) => console.error(err));
   }, []);
- 
+
 
   const [depositeList, setDepositeList] = useState();
-  const [activeTab, setActiveTab] = useState('info'); 
-   
+  const [activeTab, setActiveTab] = useState('info');
+
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
       <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">
@@ -98,18 +98,18 @@ const Profile = () => {
 
             {/* Content */}
             <div className="mt-4 text-sm text-gray-700 px-4">
-              {activeTab === 'info' && <Profiledata data={profile?.data}/>}
-              {activeTab === 'team' && <ComingSoon/>} 
-              {activeTab === 'ads' && <MyAds/>}
+              {activeTab === 'info' && <Profiledata data={profile?.data} />}
+              {activeTab === 'team' && <ComingSoon />}
+              {activeTab === 'ads' && <MyAds />}
               {activeTab === 'deposit' && <><Link onClick={() => setDepositeList(true)}>Deposit</Link>
-                            <Deposite
-                                    isOpen={depositeList}
-                                    onClose={() => setDepositeList(false)}
-                                    onUploadConfirm={() => {
-                                      setDepositeList(false);
-                                      navigate("/paymenthistory"); // 👈 Navigate to the new route
-                                    }}
-                            /></>}
+                <Deposite
+                  isOpen={depositeList}
+                  onClose={() => setDepositeList(false)}
+                  onUploadConfirm={() => {
+                    setDepositeList(false);
+                    navigate("/paymenthistory"); // 👈 Navigate to the new route
+                  }}
+                /></>}
               {/* {activeTab === 'feedback' && <ComingSoon/>} */}
               {/* {activeTab === 'ads' && <>
                 {Mydeals.map((myDeal, i) => (
@@ -122,11 +122,9 @@ const Profile = () => {
                   </div>
                 ))}
               </>} */}
-               
+
               {/* {activeTab === 'followers' && <div>Followers (20) content goes here...</div>} */}
             </div>
-
-
 
           </div>
         </div>

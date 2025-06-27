@@ -14,6 +14,7 @@ import InformationIcon from '../../assets/svgs/info.svg'
 import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom'
+// import ComingSoon from '../components/ComingSoon'
 
 
 const Settings = () => {
@@ -69,28 +70,28 @@ const Settings = () => {
       label: t('Language'),
       action: (
         <div className="relative w-full max-w-[200px]">
-  <select
-    onChange={changeLanguage}
-    value={currentLang}
-    className="focus:outline-0 focus:box-shadow-none focus:border-gray-300  block appearance-none w-full px-4 py-2 pr-8 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 font-medium focus:outline-none text-[15px] "
-  >
-    <option className="text-left" value="en">{t('English')}</option>
-    <option className="text-left" value="hi">{t('Hindi')}</option>
-    <option className="text-left" value="fr">{t('French')}</option>
-  </select>
-  {/* Custom arrow icon */}
-  <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-500">
-    <svg
-      className="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-</div>
+          <select
+            onChange={changeLanguage}
+            value={currentLang}
+            className="focus:outline-0 focus:box-shadow-none focus:border-gray-300  block appearance-none w-full px-4 py-2 pr-8 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 font-medium focus:outline-none text-[15px] "
+          >
+            <option className="text-left" value="en">{t('English')}</option>
+            <option className="text-left" value="hi">{t('Hindi')}</option>
+            <option className="text-left" value="fr">{t('French')}</option>
+          </select>
+          {/* Custom arrow icon */}
+          <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-500">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
       ),
     },
     {
@@ -121,22 +122,22 @@ const Settings = () => {
 
               {/* Settings List */}
               <div className="w-full">
-              {settingsItems.map((item, index) => (
-  <div key={index} className="flex items-center justify-between pl-4 border-b border-gray-300">
-    {item.link ? (
-      <Link to={item.link} className="flex items-center gap-2 py-4 flex-1">
-        <span>{item.icon}</span>
-        <span className="font-medium text-[15px]">{item.label}</span>
-      </Link>
-    ) : (
-      <div className="flex items-center gap-2 py-4">
-        <span>{item.icon}</span>
-        <span className="font-medium text-[15px]">{item.label}</span>
-      </div>
-    )}
-    {item.action && <div className="pr-4">{item.action}</div>}
-  </div>
-))}
+                {settingsItems.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between pl-4 border-b border-gray-300">
+                    {item.link ? (
+                      <Link to={item.link} className="flex items-center gap-2 py-4 flex-1">
+                        <span>{item.icon}</span>
+                        <span className="font-medium text-[15px]">{item.label}</span>
+                      </Link>
+                    ) : (
+                      <div className="flex items-center gap-2 py-4">
+                        <span>{item.icon}</span>
+                        <span className="font-medium text-[15px]">{item.label}</span>
+                      </div>
+                    )}
+                    {item.action && <div className="pr-4">{item.action}</div>}
+                  </div>
+                ))}
 
                 {/* Logout */}
                 <button
@@ -144,7 +145,7 @@ const Settings = () => {
                   type='button'
                   className="flex items-center  px-4 py-3 text-sm text-[var(--logout)] font-medium"
                 >
-                  
+
                   <img src={LogoutIcon} />
                   <span className='pl-2'>{t('Logout')}</span>
                 </button>

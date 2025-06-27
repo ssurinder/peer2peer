@@ -28,7 +28,7 @@ const reviews = [
         name: "William Ramirez",
         title: "Professor",
         text: "I've tried other trading bots in the past, but Royal Q is by far the best. The results speak for themselves.",
-        image: userprofile2, // from public/images
+        image: userprofile2,
     },
     {
         name: "Bright David",
