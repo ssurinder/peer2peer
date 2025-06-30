@@ -1,7 +1,7 @@
-const profileData = ({data}) => { 
+const profileData = ({ data }) => {
     return <>
 
-    <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+        <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg border border-gray-200">
             <h2 class="text-lg font-bold text-blue-700 mb-4 border-b pb-2">👤 User Info</h2>
 
             <ul class="text-sm text-gray-700 space-y-3">

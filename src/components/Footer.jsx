@@ -18,7 +18,7 @@ const Footer = () => {
         Public Footer
       </div>
     );
-  }else{
+  } else {
     return (
       <div className="sticky w-full bottom-0 left-0 right-0 bg-white shadow-[0_0px_4px_0px_rgba(0,0,0,0.04)]  flex justify-around py-2 text-sm z-0">
         <NavLink
@@ -67,7 +67,7 @@ const Footer = () => {
           }
         >
           <FiUser size={20} />
-        <span>{t('profile')}</span>
+          <span>{t('profile')}</span>
         </NavLink>
       </div>
     );

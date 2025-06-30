@@ -42,17 +42,7 @@ const PaymentMethod = () => {
                     {/* <button className='text-xs flex items-center text-black leading-5 px-3 bg-[var(--delete)] rounded-full'>{t('Delete')}</button> */}
                     <img src={checkIcon} />
                   </div>
-                  {/* <div className="pointer-events-none flex items-center text-gray-500">
-                      <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div> */}
+                 
                 </Link>
               </div>
               <div className=''>
@@ -62,7 +52,6 @@ const PaymentMethod = () => {
                 <p>Account Number : {data?.accountNumber}</p>
                 <p>IFSC Code : {data?.ifscCode}</p>
                 <p>UPI : {data?.upi}</p>
-                {/* <p>Wallet Address : {data?.upi}</p> */}
 
               </div>
             </div>

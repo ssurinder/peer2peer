@@ -26,10 +26,14 @@ import Notifications from './pages/Profile/notifications';
 import Wallet from './pages/Profile/wallet';
 import Help from './pages/Profile/help';
 import About from './pages/Profile/about';
+import Raiseticket from './pages/Profile/Raiseticket';
+import Tickethistory from './pages/Profile/Tickethistory';
+import Teams from './pages/Profile/Teams';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
+
 
 const App = () => {
   return (
@@ -61,6 +65,9 @@ const App = () => {
         <Route path='/wallet' element={<Wallet />} />
         <Route path='/help' element={<Help />} />
         <Route path='/about' element={<About />} />
+        <Route path='/raiseTicket' element={<Raiseticket />} />
+        <Route path='/tickethistory' element={<Tickethistory />} />
+        <Route path='/teams' element={<Teams />} />
       </Route>
     </Routes>
   );
