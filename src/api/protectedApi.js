@@ -18,15 +18,29 @@ api.interceptors.request.use(config => {
 //   }
 // );
 
-export const getData = (url, params) => api.get(url, { params }); 
+// export const getData = (url, params) => api.get(url, { params }); 
 
-// export const postData = async (url, data) => {
-//   const response = await api.post(url, data);
-//   console.log(' r ' , response)
-//   return response;
-// };
+export const getData = async(url , params ) => {
+  try{
+    const response = await api.get(url, {params});
+    return response;
+  }catch (error){
+    const errorMessage =
+      error?.response?.data?.message ||
+      error?.response?.data?.error ||
+      'Something went wrong';
+
+    // Optionally remove token if unauthorized
+    if (error.response?.status === 401) {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('isAuthenticated')
+    }
+
+    // Throw custom error to show in UI
+    throw new Error(errorMessage);
+  }
+}
  
-
 export const postData = async (url, data) => {
   try {
     const response = await api.post(url, data);
