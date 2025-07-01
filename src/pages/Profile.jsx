@@ -9,6 +9,7 @@ import MyAds from './Profile/myAds'
 import Deposite from './Saller/Deposite';
 import { FaThumbsUp, FaCrown, FaShareAlt, FaCog } from 'react-icons/fa';
 import { getData } from '../api/protectedApi'
+import Teams from './Profile/Teams';
 import { myDeals } from '../api/api';
 // import { toast } from 'react-toastify';
 
@@ -36,12 +37,14 @@ const Profile = () => {
 
 
 
-  
+
   const [depositeList, setDepositeList] = useState();
   const [activeTab, setActiveTab] = useState('info');
 
   return (
     <div className='max-w-[600px] mx-auto w-full bg-[var(--primary)]'>
+
+
       <div className="min-h-screen flex flex-col items-center bg-white text-black font-sans ">
         <div className='h-[calc(100vh_-_56px)] overflow-auto w-full bg-[var(--primary)] '>
           <Header />
@@ -51,6 +54,7 @@ const Profile = () => {
                 <div className='flex w-full items-center justify-between  px-4'>
                   <img
                     src="https://i.pravatar.cc/100"
+
                     alt="Avatar"
                     className="h-14 w-14 rounded-full"
                   />
@@ -87,6 +91,8 @@ const Profile = () => {
             <div className="flex space-x-4 border-b border-gray-300 text-sm px-4 font-medium overflow-auto">
               {tabs.map((tab) => (
                 <button
+
+
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
                   className={`py-2 px-1 text-black relative text-nowrap ${activeTab === tab.key ? 'font-semibold' : 'text-gray-500 '
@@ -103,7 +109,7 @@ const Profile = () => {
             {/* Content */}
             <div className="mt-4 text-sm text-gray-700 px-4">
               {activeTab === 'info' && <Profiledata data={profile?.data} />}
-              {activeTab === 'team' && <ComingSoon />}
+              {activeTab === 'team' && <Teams />}
               {activeTab === 'ads' && <MyAds />}
               {activeTab === 'deposit' && <><Link onClick={() => setDepositeList(true)}>Deposit</Link>
                 <Deposite
