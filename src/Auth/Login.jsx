@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Password from "../Auth/Password"
 import { loginUser } from "../api/api";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -15,6 +16,7 @@ import { toast } from 'react-toastify';
 
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -62,7 +64,7 @@ const Login = () => {
               <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block" />
               <h1 className="text-2xl font-semibold leading-4 mt-6 mb-10">Welcome to Coin P2P Trader</h1>
               <form className="w-full space-y-4" onSubmit={handleSubmit}>
-                <div className="w-full mb-4 px-6">
+                <div className="w-full mb-4 px-6 relative">
                   <label className="text-[15px] leading-4 text-black text-left font-medium mb-3 block w-full">
                     User ID/ Email
                   </label>
@@ -74,16 +76,27 @@ const Login = () => {
                     required
                     className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none"
                   />
-                   <label className="text-[15px] leading-4 text-black text-left font-medium my-3 block w-full">
-                    Password
-                  </label>
-                  <input 
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter Password"
-                    className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none"
-                  />
+                   <div class="relative w-full">
+                      <label className="text-[15px] leading-4 text-black text-left font-medium my-3 block w-full">
+                        Password
+                      </label>
+                      <input 
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter Password"
+                        // className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none"
+                        className='w-full px-4 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                      />
+                      <div
+                        className="absolute right-[6px] top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                      >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </div>
+                  </div>
+
+ 
                   <Link to="/forgot_password" className="text-right flex mt-2 font-semibold text-[var(--link-color)] justify-end">Forgot Password</Link>
                   <button type="submit" className=" mt-4 w-full rounded-xl py-3 px-4 text-base leading-5 text-black font-normal cursor-pointer bg-gradient-to-r from-[var(--button-gradient-1)] to-[var(--button-gradient-2)]">
                     {loading ? 'Signing in...' : 'Sign in'}

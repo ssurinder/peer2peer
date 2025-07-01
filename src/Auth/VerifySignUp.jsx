@@ -79,21 +79,21 @@ const VerifySignUp = () => {
 
   return (
     <> 
-      <div className='w-full flex flex-col justify-center'>
+       <div className='max-w-[600px] mx-auto'>
         <ToastContainer position="top-right" autoClose={3000} />
         <img src={Logo} alt="Logo" className="w-32 mt-5 inline-block mx-auto" />
         <h1 className="text-2xl font-semibold text-center  leading-4 mt-6 mb-10">Enter OTP</h1>
         <p className="text-base font-normal text-black leading-6 text-center">OTP sent to your registered Email Address</p>
-        <p>{email}</p>
+        <p className='text-center'>{email}</p>
         <p className="text-base font-normal text-black leading-6 mb-6 text-center">
           Please enter the OTP and click on Continue
         </p>
-        <form className="w-full space-y-4" onSubmit={handleOtpSubmit}>
+        <form className="" onSubmit={handleOtpSubmit}>
           <label className="text-[15px] leading-4 text-black text-left font-medium mb-3 block w-full">
             OTP
           </label>
 
-          <div className="flex items-center justify-start space-x-4">
+          <div className="flex justify-between gap-2 mb-6">
             {Array(6)
               .fill()
               .map((_, i) => (
@@ -105,6 +105,7 @@ const VerifySignUp = () => {
                   onChange={(e) => handleChange(e, i)}
                   onKeyDown={(e) => handleKeyDown(e, i)}
                   className="w-14 h-12 text-center border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  // className='w-10 h-10 border rounded-md text-center text-base focus:outline-none focus:ring-1 focus:ring-blue-500'
                 />
               ))}
           </div>
