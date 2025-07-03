@@ -5,6 +5,7 @@ import UsdtIcon from '../assets/images/usdt.png'
 import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 import Deal from '../components/Deal';
+import Accept from '../components/Accept';
 import { Link } from 'react-router-dom';
 // import Deposite from './Saller/Deposite';
 // import PaymentHistory from './Profile/PaymentHistory';
@@ -52,43 +53,8 @@ const Dashboard = () => {
                   <Filter />
                 {/* Trade Card */}
                 <div className='flex flex-col px-4'>
-                {
-                  activeTab === "deal" && (
-                  <><Deal />
-                  </>
-                  )
-                }
-                {activeTab === "accept" && (
-                  <div className="border border-[var(--bg-color)] rounded-lg p-4 shadow-sm relative overflow-hidden">
-                    <div className="absolute top-0 right-0 text-xs bg-blue-100 text-blue-600 px-2 py-0.5 border-r-xl pl-4 rounded-bl-full text-[8px] font-semibold leading-4">Featured Deal</div>
-                    <div className="flex justify-between items-center mb-1">
-                      <div className="items-center flex">
-                        <img src={UsdtIcon} className='shrink-0' />
-                        <span className='ml-2 font-medium font-sm text-black'>Ledgerower</span>
-                        <span className="ml-2">
-                          {/* Star icon */}
-                          <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 0.5L11.0206 6.71885H17.5595L12.2694 10.5623L14.2901 16.7812L9 12.9377L3.70993 16.7812L5.73056 10.5623L0.440492 6.71885H6.97937L9 0.5Z" fill="#A707F1"/>
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="text-xs font-normal text-[var(--text-color)]">Trade(s) 1824 (89.40%)</div>
-                    <div className='flex items-end justify-between'>
-                      <div className='flex-1'>
-                        <div className="text-lg"><span className='text-sm font-bold'>₹</span> 92.01<span className="text-sm text-[var(--text-color)]">/USDT</span></div>
-                        <div className="text-xs  text-[var(--text-color)]">
-                          Amount req. $100 <br />
-                          Available 18,27,639.38 USDT
-                        </div>
-                      </div>
-                      <div className="flex flex-col justify-end gap-2 shrink-0">
-                        <button className="bg-[var(--button-light)] text-[var(--red)] px-4 py-1 rounded">Reject</button>
-                        <button className="bg-[var(--success)] text-white px-4 py-1 rounded">Accept</button>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {  activeTab === "deal" && ( <><Deal />  </>  ) }
+                {activeTab === "accept" && ( <><Accept/></>)}
               </div>  
             </div>
                 </div>

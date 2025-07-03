@@ -49,9 +49,7 @@ export const postData = async (url, data) => {
     console.error('❌ Error:', error);
 
     // Get server message if available
-    const errorMessage =
-      error?.response?.data?.message ||
-      error?.response?.data?.error ||
+    return  error?.response?.data  || error?.response?.data  ||
       'Something went wrong';
 
     // Optionally remove token if unauthorized
@@ -64,4 +62,8 @@ export const postData = async (url, data) => {
   }
 };
 
+
+export const postFileData = async(url , data) => {
+  
+}
 export default api;
