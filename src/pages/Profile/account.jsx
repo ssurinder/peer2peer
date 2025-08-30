@@ -124,8 +124,8 @@ export default function account() {
                                             {activity.transactionType.replace('_', ' ')}
                                         </span>
                                         </div>
-                                        <div className="text-sm text-gray-500">{formatDate(tx.date)}</div>
-                                        <div className="border rounded-md px-3 py-1 font-mono text-sm">{tx.txId}</div>
+                                        {/* <div className="text-sm text-gray-500">{formatDate(tx.date)}</div> */}
+                                        {/* <div className="border rounded-md px-3 py-1 font-mono text-sm">{tx.txId}</div> */}
                                     </div>
 
 

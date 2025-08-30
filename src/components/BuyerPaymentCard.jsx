@@ -44,7 +44,8 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
         setPreview('');
         } catch (err) {
             console.log('err  ' , err)
-        alert('Upload failed');
+             toast.error(err.message)
+                 alert('Upload failed');
         } finally {
         setUploading(false);
         }
