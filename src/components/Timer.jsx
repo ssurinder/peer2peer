@@ -34,14 +34,17 @@ const CountdownTimer = ({ expireAt, label }) => {
   }, []);
 
   return (
-    <div className="bg-white text-gray-800 rounded-xl shadow p-3 w-full max-w-xs mx-auto mb-4">
+    <div className="  rounded-b-xl  w-full  max-w-xs overflow-auto ">
       <div className="text-sm font-medium mb-1">{label}</div>
-      <div className="text-center text-xl font-semibold tracking-widest">
+      <div className="flex items-center gap-1.5">
+        <p className='text-gray-800'>Expires In : </p>
+      <div className="text-center text-lg font-medium tracking-widest text-red-600">
         {formatTime(remaining)}
       </div>
-      {remaining === 0 && (
+      </div>
+      {/* {remaining === 0 && (
         <p className="text-red-500 text-xs text-center mt-1">⏰ Time's up!</p>
-      )}
+      )} */}
     </div>
   );
 };

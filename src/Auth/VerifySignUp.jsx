@@ -30,7 +30,7 @@ const VerifySignUp = () => {
      
       if(response.success == true){
         toast.success(response.message); 
-        // localStorage.setItem('auth_token', response.data);
+        localStorage.setItem('auth_token', response.data.token);
         // let successMessage = 'Dear '+response.data.details.name + ' Your Acount Created Successfully <br>UserId : '+response.data.details.userId + '<br>Password : '+response.data.details.password
         setTimeout(() => {
           navigate("/register-success",{ state: {data: response.data.details} });

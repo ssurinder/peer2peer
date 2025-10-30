@@ -76,7 +76,7 @@ const Login = () => {
                     required
                     className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none"
                   />
-                   <div class="relative w-full">
+                   <div class="relative w-full ">
                       <label className="text-[15px] leading-4 text-black text-left font-medium my-3 block w-full">
                         Password
                       </label>
@@ -89,7 +89,7 @@ const Login = () => {
                         className='w-full px-4 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                       />
                       <div
-                        className="absolute right-[6px] top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                        className="absolute right-[6px] top-3/4 transform -translate-y-1/2 text-gray-500 cursor-pointer"
                         onClick={() => setShowPassword((prev) => !prev)}
                       >
                       {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -108,7 +108,7 @@ const Login = () => {
                 </div>
                 
 
-                <div className="space-y-3 px-6">
+                {/* <div className="space-y-3 px-6">
                   <button className="w-full flex items-center justify-center gap-2 py-3 px-4 text-base leading-5 bg-white text-black font-normal cursor-pointer rounded-xl border border-neutral-300 hover:bg-gray-100">
                     <img src={GoogleIcon} className="w-5 h-5" alt="Google" />
                     Sign in with Google
@@ -123,7 +123,7 @@ const Login = () => {
                     <img src={AppleIcon} className="w-5 h-5" alt="Apple" />
                     Sign in with Apple
                   </button>
-                </div>
+                </div> */}
               </form>
             </div>
             </> 

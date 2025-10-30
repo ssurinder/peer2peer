@@ -98,7 +98,7 @@ const BuyerPaymentCard = ({id , closeSellerForm}) => {
         {/* UPI ID */}
             {(dealDetail?.bankDetails?.upi && (
                 <div className="py-3 space-y-1 text-sm border-b">
-                    <div className="text-center text-gray-500 text-xs">or</div>
+                    {/* <div className="text-center text-gray-500 text-xs">or</div> */}
                     <div className="flex justify-between">
                     <span className="text-gray-500">UPI ID</span>
                     <span>{dealDetail?.bankDetails?.upi }</span>
