@@ -66,4 +66,6 @@ export const postData = async (url, data) => {
 export const postFileData = async(url , data) => {
   
 }
+
+
 export default api;

@@ -161,7 +161,7 @@ const CreateAds = () => {
                   </select>
                 </div>
 
-                 <div class="bg-gray-50 p-5 rounded-xl shadow-inner">
+                 {/* <div class="bg-gray-50 p-5 rounded-xl shadow-inner">
                   <h3 class="text-lg font-bold text-blue-600 mb-4 flex items-center gap-2">
                     🏦 Bank Details
                   </h3>
@@ -172,7 +172,7 @@ const CreateAds = () => {
                     <li><span class="font-medium">🏷️ IFSC:</span>  {bankInfo?.ifscCode}</li>
                     <li><span class="font-medium">📲 UPI:</span> {bankInfo?.upi}</li>
                   </ul>
-                </div> 
+                </div>  */}
 
                 <button type="submit" className="mt-4 w-full rounded-xl py-3 px-4 text-base leading-5 text-white font-normal cursor-pointer bg-[var(--bg-color)]">
                   {t('CreateAd')}

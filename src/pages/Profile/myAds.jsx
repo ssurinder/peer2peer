@@ -35,7 +35,7 @@ const MyAds = () => {
                             Delete
                             </button>
                             <button className="border border-black text-black font-medium px-4 py-2 rounded-md hover:bg-black hover:text-white transition">
-                            Active
+                            Deal
                             </button>
                         </div>
                     </div>

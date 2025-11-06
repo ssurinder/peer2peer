@@ -76,7 +76,7 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
         </div>
 
         {/* Amount Section */}
-        <div className="text-sm space-y-1 border-b pb-2">
+        <div className="text-sm space-y-1 border-b border-t py-5">
             <div className="flex justify-between">
             <span>Amount</span>
             <span>{dealDetail?.fiatAmount }</span>
@@ -85,7 +85,7 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
             <span>Commission (2.5%)</span>
             <span>{dealDetail?.buyerCommission }rs</span>
             </div>
-            <div className="flex justify-between font-semibold text-green-600 border-t pt-2 mt-1">
+            <div className="flex justify-between font-semibold text-green-600 border-t pt-5 mt-5">
             <span>Total Amount</span>
             <span>{parseFloat(dealDetail?.fiatAmount) + parseFloat(dealDetail?.buyerCommission) }rs</span>
             </div>
@@ -124,8 +124,12 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
 
         {/* UPI ID */}
         {(dealDetail?.bankDetails?.upi && (
-             <div className="py-3 space-y-1 text-sm border-b">
-                <div className="text-center text-gray-500 text-xs">or</div>
+             <div className="py-4 space-y-1 text-sm border-b ">
+               <div className="flex items-center justify-center text-gray-500 text-xs w-full">
+                            {/* <div className="flex-1 h-[1px] bg-gray-400 block"></div>
+                            <span className="px-3">or</span>
+                            <div className="flex-1 h-[1px] bg-gray-400 block"></div> */}
+                        </div>
                 <div className="flex justify-between">
                 <span className="text-gray-500">UPI ID</span>
                 <span>{dealDetail?.bankDetails?.upi }</span>
@@ -136,7 +140,7 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
 
         {/* Receipt Upload */}
              {preview && (
-                <div className="pt-2">
+                <div className="pt-5">
                 <img
                     src={preview}
                     alt="Receipt Preview"
@@ -146,7 +150,7 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
             )}
 
             {/* Upload Receipt */}
-            <div className="flex justify-between items-center border-t pt-2">
+            <div className="flex justify-between items-center border-t pt-5">
                 <span>Receipt</span>
                 <label className="bg-gray-200 text-gray-700 px-3 py-1 text-xs rounded cursor-pointer">
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
@@ -158,7 +162,7 @@ const BuyerPaymentCard = ({id , closeBuyerForm}) => {
              <button
                 onClick={handleUpload}
                 disabled={!file || uploading}
-                className={`w-full text-white text-sm py-2 rounded transition ${
+                className={`w-full text-white text-sm mt-9 py-2 rounded transition ${
                 file ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-300 cursor-not-allowed'
                 }`}
             >

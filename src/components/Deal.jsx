@@ -35,23 +35,23 @@ const Deal = () => {
 
   const fetchDeals = () => {
     setDealList([]);
-  setCurrentDetail(false);
-  getData("/user/allDeals", {})
-    .then((res) => {
-      if (res.data.data.dealStatus === false) {
-        setDealList(res.data.data.deals);
-      } else {
-        setCurrentDetail(res.data.data.deal);
-      }
-      console.log("data ", res.data.data);
-    })
-    .catch((err) => console.error(err));
-};
+    setCurrentDetail(false);
+    getData("/user/allDeals", {})
+      .then((res) => {
+        if (res.data.data.dealStatus === false) {
+          setDealList(res.data.data.deals);
+        } else {
+          setCurrentDetail(res.data.data.deal);
+        }
+        console.log("data ", res.data.data);
+      })
+      .catch((err) => console.error(err));
+  };
 
-// Fetch deals when component mounts
-useEffect(() => {
-  fetchDeals();
-}, []);
+  // Fetch deals when component mounts
+  useEffect(() => {
+    fetchDeals();
+  }, []);
 
 
   const showDealDetails = (deal) => {
@@ -64,28 +64,28 @@ useEffect(() => {
   };
 
   // ✅ Updated: Handle pick deal with navigation
-const handleDeal = async (dealId) => {
-  const confirmed = window.confirm("Are you sure you want to pick this deal?");
-  if (!confirmed) return;
+  const handleDeal = async (dealId) => {
+    const confirmed = window.confirm("Are you sure you want to pick this deal?");
+    if (!confirmed) return;
 
-  try {
-    const res = await postData("/user/pickDeal", { id: dealId });
-    console.log("Deal picked:", res);
+    try {
+      const res = await postData("/user/pickDeal", { id: dealId });
+      console.log("Deal picked:", res);
 
-    if (res?.data?.success) {
-      toast.success("Deal picked successfully!"); // ✅ Close modal
-    setIsOpen(false);
+      if (res?.data?.success) {
+        toast.success("Deal picked successfully!"); // ✅ Close modal
+        setIsOpen(false);
 
-    // ✅ Refresh deal list (soft reload)
-    fetchDeals();
-    } else {
-      toast.error(res?.data?.message || "Failed to pick deal.");
+        // ✅ Refresh deal list (soft reload)
+        fetchDeals();
+      } else {
+        toast.error(res?.data?.message || "Failed to pick deal.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to pick deal. Please try again.");
     }
-  } catch (err) {
-    console.error(err);
-    toast.error("Failed to pick deal. Please try again.");
-  }
-};
+  };
 
 
 
@@ -131,11 +131,11 @@ const handleDeal = async (dealId) => {
               </button>
             ) : currentDeal.status === "ACCEPTED" ? (
               <button
-              className="bg-[var(--button-light)] text-[var(--red)] px-4 py-1 rounded"
-              onClick={() => {
-                setCurrentDealId(currentDeal?._id);
-                setIsBuyerFormOpen(true);
-              }}
+                className="bg-[var(--button-light)] text-[var(--red)] px-4 py-1 rounded"
+                onClick={() => {
+                  setCurrentDealId(currentDeal?._id);
+                  setIsBuyerFormOpen(true);
+                }}
               >
                 PAY
               </button>
@@ -147,7 +147,7 @@ const handleDeal = async (dealId) => {
           </div>
           <div className="border-t border-dashed mt-4">
             <Timer expireAt={currentDeal.timestamps.expireAt} />
-            </div>
+          </div>
         </div>
       )}
 
@@ -205,7 +205,7 @@ const handleDeal = async (dealId) => {
                 </div>
               </div>
 
-              <div className="w-full mb-2">
+              <div className="flex items-center justify-between w-full mb-2">
                 <label className="block text-sm text-gray-600 mb-1">
                   Amount
                 </label>
@@ -243,7 +243,7 @@ const handleDeal = async (dealId) => {
         dealList.map((deal, index) => (
           <div
             key={index}
-            className="border-b border-[var(--border-light)] pt-0 px-4 pb-4 relative overflow-hidden transition-all duration-300 hover:border-[#1560FF] hover:rounded-xl"
+            className="border-b border-[var(--border-light)] pt-0 px-4 pb-4 relative overflow-hidden transition-all hover:border hover:border-blue-500 hover:rounded-md"
           >
             <div className="flex justify-between items-center mb-1">
               <div className="flex items-center">
@@ -277,7 +277,7 @@ const handleDeal = async (dealId) => {
               >
                 Deal
               </button>
-                      <p><Timer expireAt={deal.timestamps.expireAt} /></p>
+              {/* <p><Timer expireAt={deal.timestamps.expireAt} /></p> */}
 
             </div>
           </div>

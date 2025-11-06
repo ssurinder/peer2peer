@@ -1,101 +1,120 @@
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import CopyIcon from '../assets/images/copy_icon.png'
+import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import CopyIcon from "../assets/images/copy_icon.png";
 
-const allOrders = [
-  {
-    type: 'Accept',
-    status: 'Completed',
-    amount: '$121,121,254.99',
-    price: '$63,254.99',
-    quantity: '21156413121 BTC',
-    order: '2112121312312312312313',
-    time: '23:01:2025 12:00pm',
-  },
-  {
-    type: 'Deal',
-    status: 'Cancelled',
-    amount: '$121,121,254.99',
-    price: '$63,254.99',
-    quantity: '21156413121 BTC',
-    order: '2112121312312312312313',
-    time: '23:01:2025 12:00pm',
-  },
-   {
-    type: 'Processing',
-    status: 'Processing',
-    amount: '$121,121,254.99',
-    price: '$63,254.99',
-    quantity: '21156413121 BTC',
-    order: '2112121312312312312313',
-    time: '23:01:2025 12:00pm',
-  },
-];
-
-const processingOrders = [
-  {
-    type: 'Accept',
-    status: 'Processing',
-    amount: '$99,000,000.00',
-    price: '$50,000.00',
-    quantity: '200000 BTC',
-    order: '321321321321',
-  },
-];
-
-const profitLossStatements = [
-   {
-    type: 'Accept',
-    status: 'Completed',
-    amount: '$121,121,254.99',
-    price: '$63,254.99',
-    quantity: '21156413121 BTC',
-    order: '2112121312312312312313',
-    time: '23:01:2025 12:00pm',
-  },
-  {
-    type: 'Deal',
-    status: 'Cancelled',
-    amount: '$121,121,254.99',
-    price: '$63,254.99',
-    quantity: '21156413121 BTC',
-    order: '2112121312312312312313',
-    time: '23:01:2025 12:00pm',
-  },
-];
+const BASE_URL = "http://192.168.1.34:8800/api";
 
 const Orders = () => {
-  const [tab, setTab] = useState('all_orders');
-  const [filter, setFilter] = useState('all');
+  const [tab, setTab] = useState("all_orders");
+  const [filter, setFilter] = useState("all");
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const filteredAllOrders =
-  filter === 'cancelled'
-    ? allOrders.filter((order) => order.status === 'Cancelled')
-    : filter === 'completed'
-    ? allOrders.filter((order) => order.status === 'Completed')
-    : allOrders;
+  // ✅ Fetch Orders Function
+  const fetchOrders = async (params = {}) => {
+    setLoading(true);
+
+    try {
+      const token = localStorage.getItem("token");
+      console.log("🔹 Token from localStorage:", token);
+
+      if (!token) {
+        alert("No token found — please log in again.");
+        setOrders([]);
+        setLoading(false);
+        return;
+      }
+
+      const query = new URLSearchParams(params).toString();
+      const url = `${BASE_URL}/user/orderHistory${query ? `?${query}` : ""}`;
+      console.log("🔹 Fetching from URL:", url);
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("🔹 HTTP Status:", res.status);
+
+      if (res.status === 401) {
+        alert("Session expired. Please log in again.");
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+        return;
+      }
+
+      // If not OK, log raw text for debugging
+      if (!res.ok) {
+        const rawText = await res.text();
+        console.error("❌ Non-OK response:", rawText);
+        throw new Error(`HTTP error ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log("✅ API Response Data:", data);
+
+      if (data.success && data.data?.orders) {
+        console.log("✅ Orders fetched successfully:", data.data.orders);
+        setOrders(data.data.orders);
+      } else {
+        console.warn("⚠️ No orders or API returned error:", data.message);
+        setOrders([]);
+      }
+    } catch (err) {
+      console.error("🔥 Error fetching orders:", err);
+      setOrders([]);
+    } finally {
+      setLoading(false);
+      console.log("🔹 Fetch Orders Complete");
+    }
+  };
+
+  // ✅ Fetch when tab changes
+  useEffect(() => {
+    if (tab === "all_orders") {
+      fetchOrders();
+    } else if (tab === "processing") {
+      fetchOrders({ status: "PROCESSING" });
+    } else if (tab === "pl-statement") {
+      fetchOrders({ status: "COMPLETED" });
+    }
+  }, [tab]);
+
+  // ✅ Filtered Orders Logic
+  const filteredOrders =
+    tab === "all_orders"
+      ? filter === "cancelled"
+        ? orders.filter((order) => order.status === "CANCELLED")
+        : filter === "completed"
+        ? orders.filter((order) => order.status === "COMPLETED")
+        : orders
+      : orders;
 
   return (
     <div className="max-w-[600px] mx-auto w-full bg-[var(--primary)]">
       <div className="min-h-screen flex flex-col items-center bg-white text-black">
         <div className="h-[calc(100vh_-_56px)] overflow-auto w-full bg-[var(--primary)]">
           <Header />
+
           <div className="w-full bg-[var(--primary)] rounded-t-xl relative z-[1] overflow-auto">
             <div className="w-full pt-3">
-              {/* Tabs */}
+              {/* ✅ Tabs */}
               <div className="flex border-b border-[var(--border-light)] px-4 gap-4 mb-4">
                 {[
-                  { key: 'all_orders', label: 'All Orders' },
-                  { key: 'processing', label: 'Processing' },
-                  { key: 'pl-statement', label: 'Profit & Loss Statement' },
+                  { key: "all_orders", label: "All Orders" },
+                  { key: "processing", label: "Processing" },
+                  { key: "pl-statement", label: "Profit & Loss Statement" },
                 ].map((item) => (
                   <button
                     key={item.key}
                     className={`pb-2 text-base font-semibold ${
                       tab === item.key
-                        ? 'border-b-2 border-blue-500 text-black'
-                        : 'text-[var(--text-color)]'
+                        ? "border-b-2 border-blue-500 text-black"
+                        : "text-[var(--text-color)]"
                     }`}
                     onClick={() => setTab(item.key)}
                   >
@@ -104,204 +123,144 @@ const Orders = () => {
                 ))}
               </div>
 
-              {/* Filters (only for all_orders) */}
-             {tab === 'all_orders' && (
-  <div className="flex px-4 mb-4">
-    <button
-      className={`px-3 rounded ${
-        filter === 'all'
-          ? 'bg-[#DCDCDC]  text-black'
-          : 'text-sm font-normal text-black'
-      }`}
-      onClick={() => setFilter('all')}
-    >
-      All
-    </button>
-    <button
-      className={`px-3 rounded ${
-        filter === 'completed'
-          ? 'bg-[#DCDCDC]'
-          : 'text-sm font-normal text-black'
-      }`}
-      onClick={() => setFilter('completed')}
-    >
-      Completed
-    </button>
-    <button
-      className={`px-3 rounded ${
-        filter === 'cancelled'
-          ? 'bg-[#DCDCDC]'
-          : 'text-sm font-normal text-black'
-      }`}
-      onClick={() => setFilter('cancelled')}
-    >
-      Cancelled
-    </button>
-  </div>
-)}
-
-              {/* Tab Content */}
-              <div className="w-full px-4">
-                {tab === 'all_orders' &&
-                  filteredAllOrders.map((order, index) => (
-                    <OrderCard key={index} order={order} />
-                  ))}
-
-                {tab === 'processing' &&
-                  processingOrders.map((order, index) => (
-                    <OrderCard key={index} order={order} />
-                  ))}
-
-                {tab === 'pl-statement' &&
-                  profitLossStatements.map((order, index) => (
-                    <div
-                      key={index}
-                      className="border-b border-[var(--border-light)] pb-3 mb-3 text-sm"
+              {/* ✅ Filters */}
+              {tab === "all_orders" && (
+                <div className="flex px-4 mb-4 gap-2">
+                  {["all", "completed", "cancelled"].map((f) => (
+                    <button
+                      key={f}
+                      className={`px-3 py-1 rounded-md border ${
+                        filter === f
+                          ? "bg-blue-100 border-blue-500 text-blue-700 font-semibold"
+                          : "border-gray-300 text-gray-600"
+                      }`}
+                      onClick={() => setFilter(f)}
                     >
-                    <div className="flex justify-between items-center mb-1">
-      <span
-        className={`font-semibold ${
-          order.type === 'Accept'
-            ? 'text-green-500'
-            : order.type === 'Deal'
-            ? 'text-red-500'
-            : order.type === 'Processing'
-            ? 'text-yellow-500'
-            : 'text-white'
-        }`}
-      >
-        {order.type}<span className='pl-1 text-black'>btn</span>
-      </span>
-      <span
-        className={`px-2 py-0.5 text-xs rounded-sm ${
-          order.status === 'Completed'
-            ? 'bg-blue-100 text-blue-600'
-            : order.status === 'Processing'
-            ? 'bg-yellow-100 text-yellow-600'
-            : 'bg-red-100 text-red-600'
-        }`}
-      >
-        {order.status}
-      </span>
-    </div>
-                     <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Amount</div>
-      <div className="text-black text-sm">{order.amount}</div>
-    </div>
+                      {f.charAt(0).toUpperCase() + f.slice(1)}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Price</div>
-      <div className="text-black text-sm">{order.price}</div>
-    </div>
+              {/* ✅ Orders List */}
+              <div className="w-full px-4">
+                {loading && (
+                  <p className="text-center text-gray-500 py-10">
+                    Loading orders...
+                  </p>
+                )}
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Quantity</div>
-      <div className="text-black text-sm">{order.quantity}</div>
-    </div>
+                {!loading && filteredOrders.length === 0 && (
+                  <p className="text-center text-gray-400 py-10">
+                    No orders found.
+                  </p>
+                )}
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Order</div>
-      <div className="text-black text-sm flex items-center gap-2">
-        {order.order}
-        <span><img src={CopyIcon} /></span>
-      </div>
-    </div>
-
-    {/* Show Time only for Accept orders */}
-    {order.type === 'Accept' && (order.status === 'Completed' || order.status === 'Cancelled') && (
-  <div className="flex justify-between items-center mb-1">
-    <div className="text-[var(--text-color)] text-sm">Time</div>
-    <div className="text-[var(--text-color)] text-sm">{order.time}</div>
-  </div>
-  
-)}
-{order.type === 'Deal' && (order.status === 'Completed' || order.status === 'Cancelled') && (
-  <div className="flex justify-between items-center mb-1">
-    <div className="text-[var(--text-color)] text-sm">Time</div>
-    <div className="text-[var(--text-color)] text-sm">{order.time}</div>
-  </div>
-  
-)}
-                    </div>
+                {!loading &&
+                  filteredOrders.map((order) => (
+                    <OrderCard key={order._id} order={order} />
                   ))}
               </div>
             </div>
           </div>
         </div>
+
         <Footer />
       </div>
     </div>
   );
 };
 
-const OrderCard = ({ order }) => (
-  <div className="border-b border-[var(--border-light)] pb-3 mb-3 text-sm">
-    <div className="flex justify-between items-center mb-1">
-      <span
-        className={`font-semibold ${
-          order.type === 'Accept'
-            ? 'text-green-500'
-            : order.type === 'Deal'
-            ? 'text-red-500'
-            : order.type === 'Processing'
-            ? 'text-yellow-500'
-            : 'text-white'
-        }`}
-      >
-        {order.type}<span className='pl-1 text-black'>btn</span>
-      </span>
-      <span
-        className={`px-2 py-0.5 text-xs rounded-sm ${
-          order.status === 'Completed'
-            ? 'bg-blue-100 text-blue-600'
-            : order.status === 'Processing'
-            ? 'bg-yellow-100 text-yellow-600'
-            : 'bg-red-100 text-red-600'
-        }`}
-      >
-        {order.status}
-      </span>
-    </div>
+// ✅ OrderCard Component
+const OrderCard = ({ order }) => {
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    alert("Copied to clipboard!");
+  };
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Amount</div>
-      <div className="text-black text-sm">{order.amount}</div>
-    </div>
+  return (
+    <div className="border border-gray-200 rounded-lg p-3 mb-3 shadow-sm bg-white">
+      <div className="flex justify-between items-center mb-2">
+        <span
+          className={`font-semibold ${
+            order.status === "COMPLETED"
+              ? "text-green-600"
+              : order.status === "PROCESSING"
+              ? "text-yellow-600"
+              : "text-red-600"
+          }`}
+        >
+          {order.deal?.token}/{order.deal?.fiat}
+        </span>
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Price</div>
-      <div className="text-black text-sm">{order.price}</div>
-    </div>
+        <span
+          className={`px-2 py-0.5 text-xs rounded-md ${
+            order.status === "COMPLETED"
+              ? "bg-blue-100 text-blue-700"
+              : order.status === "PROCESSING"
+              ? "bg-yellow-100 text-yellow-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {order.status}
+        </span>
+      </div>
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Quantity</div>
-      <div className="text-black text-sm">{order.quantity}</div>
-    </div>
+      <div className="flex justify-between mb-1">
+        <span className="text-gray-600 text-sm">Token Amount</span>
+        <span className="text-black font-medium">{order.tokenAmount}</span>
+      </div>
 
-    <div className="flex justify-between items-center mb-1">
-      <div className="text-[var(--text-color)] text-sm">Order</div>
-      <div className="text-black text-sm flex items-center gap-2">
-        {order.order}
-        <span><img src={CopyIcon} /></span>
+      {/* <div className="flex justify-between mb-1">
+        <span className="text-gray-600 text-sm">Fiat Amount</span>
+        <span className="text-black font-medium">{order.fiatAmount}</span>
+      </div> */}
+
+      <div className="flex justify-between mb-1">
+        <span className="text-gray-600 text-sm">Price</span>
+        <span className="text-black font-medium">{order.deal?.price}</span>
+      </div>
+
+     
+
+      {/* <div className="flex justify-between mb-1">
+        <span className="text-gray-600 text-sm">Payment Method</span>
+        <span className="text-black font-medium">
+          {order.deal?.paymentMethods?.join(", ")}
+        </span>
+      </div> */}
+
+      <div className="flex justify-between items-center mb-1">
+        <span className="text-gray-600 text-sm">Hash</span>
+        <span
+          className="text-blue-600 cursor-pointer flex items-center gap-1"
+          onClick={() => handleCopy(order.hash)}
+        >
+          {order.hash?.substring(0, 10)}...
+          <img src={CopyIcon} alt="copy" className="w-4 h-4" />
+        </span>
+      </div>
+      <div className="flex justify-between items-center mb-1">
+        <span className="text-gray-600 text-sm">id</span>
+        <span
+          className="text-blue-600 cursor-pointer flex items-center gap-1"
+          onClick={() => handleCopy(order._id)}
+        >
+          {order._id?.substring(0, 10)}...
+          <img src={CopyIcon} alt="copy" className="w-4 h-4" />
+        </span>
+      </div>
+
+      <div className="flex justify-between items-center">
+        <span className="text-gray-600 text-sm">Completed At</span>
+        <span className="text-gray-700 text-sm">
+          {order.timestamps?.completedAt
+            ? new Date(order.timestamps.completedAt).toLocaleString()
+            : "N/A"}
+        </span>
       </div>
     </div>
-
-    {/* Show Time only for Accept orders */}
-    {order.type === 'Accept' && (order.status === 'Completed' || order.status === 'Cancelled') && (
-  <div className="flex justify-between items-center mb-1">
-    <div className="text-[var(--text-color)] text-sm">Time</div>
-    <div className="text-[var(--text-color)] text-sm">{order.time}</div>
-  </div>
-  
-)}
-{order.type === 'Deal' && (order.status === 'Completed' || order.status === 'Cancelled') && (
-  <div className="flex justify-between items-center mb-1">
-    <div className="text-[var(--text-color)] text-sm">Time</div>
-    <div className="text-[var(--text-color)] text-sm">{order.time}</div>
-  </div>
-  
-)}
-  </div>
-);
+  );
+};
 
 export default Orders;
